@@ -1,0 +1,26 @@
+﻿@model  LkUgtu.oAuthLkUgtuProvider.AllInfo
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="vcenter">
+    <h2>@Model.student_info.accs.FirstOrDefault().email @Model.student_info.accs.FirstOrDefault().ugtu_id @Model.student_info.accs.FirstOrDefault().group_name</h2>
+    <hr />
+    <div class="col-md-4">
+    @{
+        Html.RenderAction("VakansPanel", new { info = Model });
+    }
+    </div>
+    <div class="col-md-4">
+    @{
+        Html.RenderAction("RegistrationPanel", new { info = Model });
+    }
+    </div>
+    <div class="col-md-4">
+    @{
+        Html.RenderAction("TrudoustrPanel", new { info = Model });
+    }
+    </div>
+</div>

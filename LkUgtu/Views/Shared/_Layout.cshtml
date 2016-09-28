@@ -1,0 +1,26 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+   @Scripts.Render("~/bundles/jquery")
+   @Scripts.Render("~/bundles/bootstrap")
+   @Styles.Render("~/Content/css")
+  
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <h3></h3>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div> 
+        @RenderBody()
+    </div>
+</body>
+</html>
