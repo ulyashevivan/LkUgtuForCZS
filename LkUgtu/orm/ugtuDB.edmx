@@ -1,0 +1,587 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище UGTUModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="nCode" />
+          </Key>
+          <Property Name="nCode" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Clastname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cfirstname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cotch" Type="varchar" MaxLength="30" />
+          <Property Name="Dd_birth" Type="datetime" />
+          <Property Name="Cplacebirth" Type="varchar" MaxLength="300" />
+          <Property Name="Linval" Type="bit" />
+          <Property Name="Ldeti" Type="bit" />
+          <Property Name="Lrab" Type="bit" />
+          <Property Name="lSex" Type="bit" />
+          <Property Name="Lobchegit" Type="bit" />
+          <Property Name="cSotTel" Type="varchar" MaxLength="500" />
+          <Property Name="ctelefon" Type="varchar" MaxLength="20" />
+          <Property Name="cEmail" Type="varchar" MaxLength="50" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="Ik_grazd" Type="int" />
+          <Property Name="Ik_sem_pol" Type="int" />
+          <Property Name="cInn" Type="varchar" MaxLength="20" />
+          <Property Name="cStrax" Type="varchar" MaxLength="20" />
+          <Property Name="ik_voen_zvanie" Type="int" />
+          <Property Name="itab_n" Type="int" />
+          <Property Name="ik_nac" Type="int" />
+          <Property Name="PersonGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PersonFullName" Type="varchar" MaxLength="92" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="PersonSmallName" Type="varchar" MaxLength="34" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="PersName" Type="varchar" MaxLength="92" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Predpriyatie">
+          <Key>
+            <PropertyRef Name="IDPredpriyatie" />
+          </Key>
+          <Property Name="IDPredpriyatie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDShtat" Type="int" />
+          <Property Name="IDSfera" Type="int" />
+          <Property Name="IDAddress" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="FIORuk" Type="varchar" MaxLength="100" />
+          <Property Name="DolznostRuk" Type="varchar" MaxLength="300" />
+          <Property Name="Telefon" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Faks" Type="varchar" MaxLength="100" />
+          <Property Name="KontaktLico" Type="varchar" MaxLength="100" />
+          <Property Name="DolznostKLico" Type="varchar" MaxLength="300" />
+          <Property Name="KontaktTelefon" Type="varchar" MaxLength="100" />
+          <Property Name="KontaktEmail" Type="varchar" MaxLength="100" />
+          <Property Name="KontaktFaks" Type="varchar" MaxLength="100" />
+          <Property Name="KontaktLicoTr" Type="varchar" MaxLength="100" />
+          <Property Name="DolznostKLicoTr" Type="varchar" MaxLength="300" />
+          <Property Name="KontaktTelefonTr" Type="varchar" MaxLength="100" />
+          <Property Name="KontaktEmailTr" Type="varchar" MaxLength="100" />
+          <Property Name="KontaktFaksTr" Type="varchar" MaxLength="100" />
+          <Property Name="IDDolznostRuk" Type="int" />
+          <Property Name="IDDolznostKLico" Type="int" />
+          <Property Name="IDDolznostKLicoTr" Type="int" />
+          <Property Name="WebSite" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Resume">
+          <Key>
+            <PropertyRef Name="idResume" />
+          </Key>
+          <Property Name="idResume" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idStatus" Type="int" Nullable="false" />
+          <Property Name="idVakans" Type="int" />
+          <Property Name="idStud" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DopInfo" Type="varchar" MaxLength="5000" />
+          <Property Name="Otmetki" Type="varchar" MaxLength="5000" />
+          <Property Name="UstroenCZS" Type="bit" />
+          <Property Name="DataPrinytiya" Type="date" Nullable="false" />
+          <Property Name="DataZakritiya" Type="date" />
+          <Property Name="idFile" Type="int" />
+        </EntityType>
+        <EntityType Name="Trudoustr">
+          <Key>
+            <PropertyRef Name="IDTrudoustr" />
+          </Key>
+          <Property Name="IDTrudoustr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDStudent" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IDDolznost" Type="int" />
+          <Property Name="IDVidPraktiki" Type="int" />
+          <Property Name="IDPredpriyatie" Type="int" Nullable="false" />
+          <Property Name="IDResume" Type="int" />
+          <Property Name="IDVakans" Type="int" />
+          <Property Name="RabotaPoSpec" Type="bit" />
+          <Property Name="RabotaVRegion" Type="bit" />
+          <Property Name="DataObzvon" Type="date" />
+          <Property Name="DataBegin" Type="date" />
+          <Property Name="DataEnd" Type="date" />
+          <Property Name="Spravka" Type="bit" />
+          <Property Name="ZarPlata" Type="int" />
+          <Property Name="IDFile" Type="int" />
+          <Property Name="Otdel" Type="varchar" MaxLength="500" />
+          <Property Name="DopInfo" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Vakans">
+          <Key>
+            <PropertyRef Name="idVakans" />
+          </Key>
+          <Property Name="idVakans" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPredpr" Type="int" Nullable="false" />
+          <Property Name="idGorod" Type="int" />
+          <Property Name="idDolznost" Type="int" Nullable="false" />
+          <Property Name="idStatus" Type="int" Nullable="false" />
+          <Property Name="DolgnostnObyazan" Type="varchar(max)" />
+          <Property Name="KolChel" Type="int" Nullable="false" />
+          <Property Name="InfoGrafikRab" Type="varchar" MaxLength="500" />
+          <Property Name="Lgoty" Type="varchar" MaxLength="500" />
+          <Property Name="LichnoeAvto" Type="bit" />
+          <Property Name="DopInfo" Type="varchar" MaxLength="5000" />
+          <Property Name="VakansName" Type="varchar" MaxLength="500" />
+          <Property Name="DataPostVakans" Type="date" Nullable="false" />
+          <Property Name="DataObzvon" Type="date" />
+          <Property Name="TrebKandidat" Type="varchar" MaxLength="5000" />
+          <Property Name="ZarPlata" Type="varchar" MaxLength="500" />
+          <Property Name="OtdelName" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="ResumeVakansForeign">
+          <End Role="Vakans" Type="Self.Vakans" Multiplicity="0..1" />
+          <End Role="Resume" Type="Self.Resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vakans">
+              <PropertyRef Name="idVakans" />
+            </Principal>
+            <Dependent Role="Resume">
+              <PropertyRef Name="idVakans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TrudoustrPredpriyatieFG">
+          <End Role="Predpriyatie" Type="Self.Predpriyatie" Multiplicity="1" />
+          <End Role="Trudoustr" Type="Self.Trudoustr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predpriyatie">
+              <PropertyRef Name="IDPredpriyatie" />
+            </Principal>
+            <Dependent Role="Trudoustr">
+              <PropertyRef Name="IDPredpriyatie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TrudoustrResumeFG">
+          <End Role="Resume" Type="Self.Resume" Multiplicity="0..1" />
+          <End Role="Trudoustr" Type="Self.Trudoustr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resume">
+              <PropertyRef Name="idResume" />
+            </Principal>
+            <Dependent Role="Trudoustr">
+              <PropertyRef Name="IDResume" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TrudoustrVakansFG">
+          <End Role="Vakans" Type="Self.Vakans" Multiplicity="0..1" />
+          <End Role="Trudoustr" Type="Self.Trudoustr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vakans">
+              <PropertyRef Name="idVakans" />
+            </Principal>
+            <Dependent Role="Trudoustr">
+              <PropertyRef Name="IDVakans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VakansPredprForeign">
+          <End Role="Predpriyatie" Type="Self.Predpriyatie" Multiplicity="1" />
+          <End Role="Vakans" Type="Self.Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predpriyatie">
+              <PropertyRef Name="IDPredpriyatie" />
+            </Principal>
+            <Dependent Role="Vakans">
+              <PropertyRef Name="idPredpr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище UGTUModelContainer">
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Predpriyatie" EntityType="Self.Predpriyatie" Schema="ShemaCZS" store:Type="Tables" />
+          <EntitySet Name="Resume" EntityType="Self.Resume" Schema="ShemaCZS" store:Type="Tables" />
+          <EntitySet Name="Trudoustr" EntityType="Self.Trudoustr" Schema="ShemaCZS" store:Type="Tables" />
+          <EntitySet Name="Vakans" EntityType="Self.Vakans" Schema="ShemaCZS" store:Type="Tables" />
+          <AssociationSet Name="ResumeVakansForeign" Association="Self.ResumeVakansForeign">
+            <End Role="Vakans" EntitySet="Vakans" />
+            <End Role="Resume" EntitySet="Resume" />
+          </AssociationSet>
+          <AssociationSet Name="TrudoustrPredpriyatieFG" Association="Self.TrudoustrPredpriyatieFG">
+            <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+            <End Role="Trudoustr" EntitySet="Trudoustr" />
+          </AssociationSet>
+          <AssociationSet Name="TrudoustrResumeFG" Association="Self.TrudoustrResumeFG">
+            <End Role="Resume" EntitySet="Resume" />
+            <End Role="Trudoustr" EntitySet="Trudoustr" />
+          </AssociationSet>
+          <AssociationSet Name="TrudoustrVakansFG" Association="Self.TrudoustrVakansFG">
+            <End Role="Vakans" EntitySet="Vakans" />
+            <End Role="Trudoustr" EntitySet="Trudoustr" />
+          </AssociationSet>
+          <AssociationSet Name="VakansPredprForeign" Association="Self.VakansPredprForeign">
+            <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+            <End Role="Vakans" EntitySet="Vakans" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UGTUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="nCode" />
+          </Key>
+          <Property Name="nCode" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clastname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cfirstname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cotch" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Dd_birth" Type="DateTime" Precision="3" />
+          <Property Name="Cplacebirth" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Linval" Type="Boolean" />
+          <Property Name="Ldeti" Type="Boolean" />
+          <Property Name="Lrab" Type="Boolean" />
+          <Property Name="lSex" Type="Boolean" />
+          <Property Name="Lobchegit" Type="Boolean" />
+          <Property Name="cSotTel" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ctelefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Ik_grazd" Type="Int32" />
+          <Property Name="Ik_sem_pol" Type="Int32" />
+          <Property Name="cInn" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cStrax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ik_voen_zvanie" Type="Int32" />
+          <Property Name="itab_n" Type="Int32" />
+          <Property Name="ik_nac" Type="Int32" />
+          <Property Name="PersonGUID" Type="Guid" Nullable="false" />
+          <Property Name="PersonFullName" Type="String" MaxLength="92" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="PersonSmallName" Type="String" MaxLength="34" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="PersName" Type="String" MaxLength="92" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityContainer Name="UGTUEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Person" EntityType="Self.Person" />
+          <EntitySet Name="Vakans" EntityType="UGTUModel.Vakans" />
+          <EntitySet Name="Predpriyatie" EntityType="UGTUModel.Predpriyatie" />
+          <AssociationSet Name="VakansPredprForeign" Association="UGTUModel.VakansPredprForeign">
+            <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+            <End Role="Vakans" EntitySet="Vakans" />
+          </AssociationSet>
+          <EntitySet Name="Resume" EntityType="UGTUModel.Resume" />
+          <AssociationSet Name="ResumeVakansForeign" Association="UGTUModel.ResumeVakansForeign">
+            <End Role="Vakans" EntitySet="Vakans" />
+            <End Role="Resume" EntitySet="Resume" />
+          </AssociationSet>
+          <EntitySet Name="Trudoustr" EntityType="UGTUModel.Trudoustr" />
+          <AssociationSet Name="TrudoustrPredpriyatieFG" Association="UGTUModel.TrudoustrPredpriyatieFG">
+            <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+            <End Role="Trudoustr" EntitySet="Trudoustr" />
+          </AssociationSet>
+          <AssociationSet Name="TrudoustrResumeFG" Association="UGTUModel.TrudoustrResumeFG">
+            <End Role="Resume" EntitySet="Resume" />
+            <End Role="Trudoustr" EntitySet="Trudoustr" />
+          </AssociationSet>
+          <AssociationSet Name="TrudoustrVakansFG" Association="UGTUModel.TrudoustrVakansFG">
+            <End Role="Vakans" EntitySet="Vakans" />
+            <End Role="Trudoustr" EntitySet="Trudoustr" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Vakans">
+          <Key>
+            <PropertyRef Name="idVakans" />
+          </Key>
+          <Property Name="idVakans" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPredpr" Type="Int32" Nullable="false" />
+          <Property Name="idGorod" Type="Int32" />
+          <Property Name="idDolznost" Type="Int32" Nullable="false" />
+          <Property Name="idStatus" Type="Int32" Nullable="false" />
+          <Property Name="DolgnostnObyazan" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="KolChel" Type="Int32" Nullable="false" />
+          <Property Name="InfoGrafikRab" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Lgoty" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LichnoeAvto" Type="Boolean" />
+          <Property Name="DopInfo" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="VakansName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DataPostVakans" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataObzvon" Type="DateTime" Precision="0" />
+          <Property Name="TrebKandidat" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="ZarPlata" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OtdelName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Predpriyatie" Relationship="UGTUModel.VakansPredprForeign" FromRole="Vakans" ToRole="Predpriyatie" />
+          <NavigationProperty Name="Resume" Relationship="UGTUModel.ResumeVakansForeign" FromRole="Vakans" ToRole="Resume" />
+          <NavigationProperty Name="Trudoustr" Relationship="UGTUModel.TrudoustrVakansFG" FromRole="Vakans" ToRole="Trudoustr" />
+        </EntityType>
+        <EntityType Name="Predpriyatie">
+          <Key>
+            <PropertyRef Name="IDPredpriyatie" />
+          </Key>
+          <Property Name="IDPredpriyatie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDShtat" Type="Int32" />
+          <Property Name="IDSfera" Type="Int32" />
+          <Property Name="IDAddress" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="FIORuk" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DolznostRuk" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Faks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KontaktLico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DolznostKLico" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="KontaktTelefon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KontaktEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KontaktFaks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KontaktLicoTr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DolznostKLicoTr" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="KontaktTelefonTr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KontaktEmailTr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="KontaktFaksTr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IDDolznostRuk" Type="Int32" />
+          <Property Name="IDDolznostKLico" Type="Int32" />
+          <Property Name="IDDolznostKLicoTr" Type="Int32" />
+          <Property Name="WebSite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vakans" Relationship="UGTUModel.VakansPredprForeign" FromRole="Predpriyatie" ToRole="Vakans" />
+          <NavigationProperty Name="Trudoustr" Relationship="UGTUModel.TrudoustrPredpriyatieFG" FromRole="Predpriyatie" ToRole="Trudoustr" />
+        </EntityType>
+        <Association Name="VakansPredprForeign">
+          <End Type="UGTUModel.Predpriyatie" Role="Predpriyatie" Multiplicity="1" />
+          <End Type="UGTUModel.Vakans" Role="Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predpriyatie">
+              <PropertyRef Name="IDPredpriyatie" />
+            </Principal>
+            <Dependent Role="Vakans">
+              <PropertyRef Name="idPredpr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Resume">
+          <Key>
+            <PropertyRef Name="idResume" />
+          </Key>
+          <Property Name="idResume" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idStatus" Type="Int32" Nullable="false" />
+          <Property Name="idVakans" Type="Int32" />
+          <Property Name="idStud" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DopInfo" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="Otmetki" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="UstroenCZS" Type="Boolean" />
+          <Property Name="DataPrinytiya" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataZakritiya" Type="DateTime" Precision="0" />
+          <Property Name="idFile" Type="Int32" />
+          <NavigationProperty Name="Vakans" Relationship="UGTUModel.ResumeVakansForeign" FromRole="Resume" ToRole="Vakans" />
+          <NavigationProperty Name="Trudoustr" Relationship="UGTUModel.TrudoustrResumeFG" FromRole="Resume" ToRole="Trudoustr" />
+        </EntityType>
+        <Association Name="ResumeVakansForeign">
+          <End Type="UGTUModel.Vakans" Role="Vakans" Multiplicity="0..1" />
+          <End Type="UGTUModel.Resume" Role="Resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vakans">
+              <PropertyRef Name="idVakans" />
+            </Principal>
+            <Dependent Role="Resume">
+              <PropertyRef Name="idVakans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Trudoustr">
+          <Key>
+            <PropertyRef Name="IDTrudoustr" />
+          </Key>
+          <Property Name="IDTrudoustr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDStudent" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IDDolznost" Type="Int32" />
+          <Property Name="IDVidPraktiki" Type="Int32" />
+          <Property Name="IDPredpriyatie" Type="Int32" Nullable="false" />
+          <Property Name="IDResume" Type="Int32" />
+          <Property Name="IDVakans" Type="Int32" />
+          <Property Name="RabotaPoSpec" Type="Boolean" />
+          <Property Name="RabotaVRegion" Type="Boolean" />
+          <Property Name="DataObzvon" Type="DateTime" Precision="0" />
+          <Property Name="DataBegin" Type="DateTime" Precision="0" />
+          <Property Name="DataEnd" Type="DateTime" Precision="0" />
+          <Property Name="Spravka" Type="Boolean" />
+          <Property Name="ZarPlata" Type="Int32" />
+          <Property Name="IDFile" Type="Int32" />
+          <Property Name="Otdel" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DopInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Predpriyatie" Relationship="UGTUModel.TrudoustrPredpriyatieFG" FromRole="Trudoustr" ToRole="Predpriyatie" />
+          <NavigationProperty Name="Resume" Relationship="UGTUModel.TrudoustrResumeFG" FromRole="Trudoustr" ToRole="Resume" />
+          <NavigationProperty Name="Vakans" Relationship="UGTUModel.TrudoustrVakansFG" FromRole="Trudoustr" ToRole="Vakans" />
+        </EntityType>
+        <Association Name="TrudoustrPredpriyatieFG">
+          <End Type="UGTUModel.Predpriyatie" Role="Predpriyatie" Multiplicity="1" />
+          <End Type="UGTUModel.Trudoustr" Role="Trudoustr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predpriyatie">
+              <PropertyRef Name="IDPredpriyatie" />
+            </Principal>
+            <Dependent Role="Trudoustr">
+              <PropertyRef Name="IDPredpriyatie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TrudoustrResumeFG">
+          <End Type="UGTUModel.Resume" Role="Resume" Multiplicity="0..1" />
+          <End Type="UGTUModel.Trudoustr" Role="Trudoustr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resume">
+              <PropertyRef Name="idResume" />
+            </Principal>
+            <Dependent Role="Trudoustr">
+              <PropertyRef Name="IDResume" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TrudoustrVakansFG">
+          <End Type="UGTUModel.Vakans" Role="Vakans" Multiplicity="0..1" />
+          <End Type="UGTUModel.Trudoustr" Role="Trudoustr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vakans">
+              <PropertyRef Name="idVakans" />
+            </Principal>
+            <Dependent Role="Trudoustr">
+              <PropertyRef Name="IDVakans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище UGTUModelContainer" CdmEntityContainer="UGTUEntities">
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="UGTUModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="nCode" ColumnName="nCode" />
+                <ScalarProperty Name="Clastname" ColumnName="Clastname" />
+                <ScalarProperty Name="Cfirstname" ColumnName="Cfirstname" />
+                <ScalarProperty Name="Cotch" ColumnName="Cotch" />
+                <ScalarProperty Name="Dd_birth" ColumnName="Dd_birth" />
+                <ScalarProperty Name="Cplacebirth" ColumnName="Cplacebirth" />
+                <ScalarProperty Name="Linval" ColumnName="Linval" />
+                <ScalarProperty Name="Ldeti" ColumnName="Ldeti" />
+                <ScalarProperty Name="Lrab" ColumnName="Lrab" />
+                <ScalarProperty Name="lSex" ColumnName="lSex" />
+                <ScalarProperty Name="Lobchegit" ColumnName="Lobchegit" />
+                <ScalarProperty Name="cSotTel" ColumnName="cSotTel" />
+                <ScalarProperty Name="ctelefon" ColumnName="ctelefon" />
+                <ScalarProperty Name="cEmail" ColumnName="cEmail" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Ik_grazd" ColumnName="Ik_grazd" />
+                <ScalarProperty Name="Ik_sem_pol" ColumnName="Ik_sem_pol" />
+                <ScalarProperty Name="cInn" ColumnName="cInn" />
+                <ScalarProperty Name="cStrax" ColumnName="cStrax" />
+                <ScalarProperty Name="ik_voen_zvanie" ColumnName="ik_voen_zvanie" />
+                <ScalarProperty Name="itab_n" ColumnName="itab_n" />
+                <ScalarProperty Name="ik_nac" ColumnName="ik_nac" />
+                <ScalarProperty Name="PersonGUID" ColumnName="PersonGUID" />
+                <ScalarProperty Name="PersonFullName" ColumnName="PersonFullName" />
+                <ScalarProperty Name="PersonSmallName" ColumnName="PersonSmallName" />
+                <ScalarProperty Name="PersName" ColumnName="PersName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vakans">
+            <EntityTypeMapping TypeName="UGTUModel.Vakans">
+              <MappingFragment StoreEntitySet="Vakans">
+                <ScalarProperty Name="OtdelName" ColumnName="OtdelName" />
+                <ScalarProperty Name="ZarPlata" ColumnName="ZarPlata" />
+                <ScalarProperty Name="TrebKandidat" ColumnName="TrebKandidat" />
+                <ScalarProperty Name="DataObzvon" ColumnName="DataObzvon" />
+                <ScalarProperty Name="DataPostVakans" ColumnName="DataPostVakans" />
+                <ScalarProperty Name="VakansName" ColumnName="VakansName" />
+                <ScalarProperty Name="DopInfo" ColumnName="DopInfo" />
+                <ScalarProperty Name="LichnoeAvto" ColumnName="LichnoeAvto" />
+                <ScalarProperty Name="Lgoty" ColumnName="Lgoty" />
+                <ScalarProperty Name="InfoGrafikRab" ColumnName="InfoGrafikRab" />
+                <ScalarProperty Name="KolChel" ColumnName="KolChel" />
+                <ScalarProperty Name="DolgnostnObyazan" ColumnName="DolgnostnObyazan" />
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="idDolznost" ColumnName="idDolznost" />
+                <ScalarProperty Name="idGorod" ColumnName="idGorod" />
+                <ScalarProperty Name="idPredpr" ColumnName="idPredpr" />
+                <ScalarProperty Name="idVakans" ColumnName="idVakans" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Predpriyatie">
+            <EntityTypeMapping TypeName="UGTUModel.Predpriyatie">
+              <MappingFragment StoreEntitySet="Predpriyatie">
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="IDDolznostKLicoTr" ColumnName="IDDolznostKLicoTr" />
+                <ScalarProperty Name="IDDolznostKLico" ColumnName="IDDolznostKLico" />
+                <ScalarProperty Name="IDDolznostRuk" ColumnName="IDDolznostRuk" />
+                <ScalarProperty Name="KontaktFaksTr" ColumnName="KontaktFaksTr" />
+                <ScalarProperty Name="KontaktEmailTr" ColumnName="KontaktEmailTr" />
+                <ScalarProperty Name="KontaktTelefonTr" ColumnName="KontaktTelefonTr" />
+                <ScalarProperty Name="DolznostKLicoTr" ColumnName="DolznostKLicoTr" />
+                <ScalarProperty Name="KontaktLicoTr" ColumnName="KontaktLicoTr" />
+                <ScalarProperty Name="KontaktFaks" ColumnName="KontaktFaks" />
+                <ScalarProperty Name="KontaktEmail" ColumnName="KontaktEmail" />
+                <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+                <ScalarProperty Name="DolznostKLico" ColumnName="DolznostKLico" />
+                <ScalarProperty Name="KontaktLico" ColumnName="KontaktLico" />
+                <ScalarProperty Name="Faks" ColumnName="Faks" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="DolznostRuk" ColumnName="DolznostRuk" />
+                <ScalarProperty Name="FIORuk" ColumnName="FIORuk" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDAddress" ColumnName="IDAddress" />
+                <ScalarProperty Name="IDSfera" ColumnName="IDSfera" />
+                <ScalarProperty Name="IDShtat" ColumnName="IDShtat" />
+                <ScalarProperty Name="IDPredpriyatie" ColumnName="IDPredpriyatie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resume">
+            <EntityTypeMapping TypeName="UGTUModel.Resume">
+              <MappingFragment StoreEntitySet="Resume">
+                <ScalarProperty Name="idFile" ColumnName="idFile" />
+                <ScalarProperty Name="DataZakritiya" ColumnName="DataZakritiya" />
+                <ScalarProperty Name="DataPrinytiya" ColumnName="DataPrinytiya" />
+                <ScalarProperty Name="UstroenCZS" ColumnName="UstroenCZS" />
+                <ScalarProperty Name="Otmetki" ColumnName="Otmetki" />
+                <ScalarProperty Name="DopInfo" ColumnName="DopInfo" />
+                <ScalarProperty Name="idStud" ColumnName="idStud" />
+                <ScalarProperty Name="idVakans" ColumnName="idVakans" />
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="idResume" ColumnName="idResume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trudoustr">
+            <EntityTypeMapping TypeName="UGTUModel.Trudoustr">
+              <MappingFragment StoreEntitySet="Trudoustr">
+                <ScalarProperty Name="DopInfo" ColumnName="DopInfo" />
+                <ScalarProperty Name="Otdel" ColumnName="Otdel" />
+                <ScalarProperty Name="IDFile" ColumnName="IDFile" />
+                <ScalarProperty Name="ZarPlata" ColumnName="ZarPlata" />
+                <ScalarProperty Name="Spravka" ColumnName="Spravka" />
+                <ScalarProperty Name="DataEnd" ColumnName="DataEnd" />
+                <ScalarProperty Name="DataBegin" ColumnName="DataBegin" />
+                <ScalarProperty Name="DataObzvon" ColumnName="DataObzvon" />
+                <ScalarProperty Name="RabotaVRegion" ColumnName="RabotaVRegion" />
+                <ScalarProperty Name="RabotaPoSpec" ColumnName="RabotaPoSpec" />
+                <ScalarProperty Name="IDVakans" ColumnName="IDVakans" />
+                <ScalarProperty Name="IDResume" ColumnName="IDResume" />
+                <ScalarProperty Name="IDPredpriyatie" ColumnName="IDPredpriyatie" />
+                <ScalarProperty Name="IDVidPraktiki" ColumnName="IDVidPraktiki" />
+                <ScalarProperty Name="IDDolznost" ColumnName="IDDolznost" />
+                <ScalarProperty Name="IDStudent" ColumnName="IDStudent" />
+                <ScalarProperty Name="IDTrudoustr" ColumnName="IDTrudoustr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

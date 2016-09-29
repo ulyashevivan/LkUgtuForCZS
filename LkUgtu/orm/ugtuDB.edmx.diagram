@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="319f5a2046d543cfbb4674fd2e0655c9" Name="Diagram1">
+        <EntityTypeShape EntityType="UGTUModel.Person" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUModel.Vakans" Width="1.5" PointX="7.875" PointY="1" />
+        <EntityTypeShape EntityType="UGTUModel.Predpriyatie" Width="1.5" PointX="1.125" PointY="9.625" />
+        <AssociationConnector Association="UGTUModel.VakansPredprForeign" />
+        <EntityTypeShape EntityType="UGTUModel.Resume" Width="1.5" PointX="3.375" PointY="1.25" />
+        <AssociationConnector Association="UGTUModel.ResumeVakansForeign" />
+        <EntityTypeShape EntityType="UGTUModel.Trudoustr" Width="1.5" PointX="10.125" PointY="5.875" />
+        <AssociationConnector Association="UGTUModel.TrudoustrPredpriyatieFG" />
+        <AssociationConnector Association="UGTUModel.TrudoustrResumeFG" />
+        <AssociationConnector Association="UGTUModel.TrudoustrVakansFG" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,4 +1,5 @@
-﻿<div class="panel panel-primary" >
+﻿@model  LkUgtu.Models.IndexVakansDTO
+<div class="panel panel-primary" >
     <div class="panel-heading">
         <h3 style="margin: 0;">
             Вакансии
@@ -16,8 +17,8 @@
             </ul>
         </div>
         <div class="panel-body" style="padding-bottom: 5px">
-            <p>Общее число вакансий </p>
-            <p>Общее число предприятий </p>
+            <p>Общее число вакансий: @Model.countVakans</p>
+            <p>Общее число предприятий: @Model.countPredpr </p>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-﻿@model  LkUgtu.oAuthLkUgtuProvider.AllInfo
+﻿@model  LkUgtu.Models.IndexDTO
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,21 +6,21 @@
 
 
 <div class="vcenter">
-    <h2>@Model.student_info.accs.FirstOrDefault().email @Model.student_info.accs.FirstOrDefault().ugtu_id @Model.student_info.accs.FirstOrDefault().group_name</h2>
+    <h2>@Model.fullName @Model.group_name</h2>
     <hr />
     <div class="col-md-4">
     @{
-        Html.RenderAction("VakansPanel", new { info = Model });
+        Html.RenderPartial("VakansPanel", Model.vakansInIndex);
     }
     </div>
     <div class="col-md-4">
     @{
-        Html.RenderAction("RegistrationPanel", new { info = Model });
+        Html.RenderPartial("RegistrationPanel", Model.regisrationInIndex);
     }
     </div>
     <div class="col-md-4">
     @{
-        Html.RenderAction("TrudoustrPanel", new { info = Model });
+        Html.RenderPartial("TrudoustrPanel", Model.trudoustrInIndex);
     }
     </div>
 </div>
