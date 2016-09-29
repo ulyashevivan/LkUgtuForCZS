@@ -10,8 +10,8 @@ namespace LkUgtu
 {
     public static class oAuthLkUgtuProvider
     {
-        public static string appId= "2fc00dd584e62699c73d600abf258e";
-        public static string secretKey= "0813e7ab7a121f9d6a82c8222c56b0";
+        public static string appId= "";
+        public static string secretKey= "";
         public static string redirectURI= "http://localhost:6358/Account/GetCode";
         public static string straccessToken;
         public static AccessToken TokenObject;
