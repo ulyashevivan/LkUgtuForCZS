@@ -15,6 +15,19 @@
         <AssociationConnector Association="UGTUModel.TrudoustrPredpriyatieFG" />
         <AssociationConnector Association="UGTUModel.TrudoustrResumeFG" />
         <AssociationConnector Association="UGTUModel.TrudoustrVakansFG" />
+        <EntityTypeShape EntityType="UGTUModel.Dolznost" Width="1.5" PointX="0.625" PointY="7.875" />
+        <AssociationConnector Association="UGTUModel.PredprDolznostKLicoForeign" />
+        <AssociationConnector Association="UGTUModel.PredprDolznostKLicoTrForeign" />
+        <AssociationConnector Association="UGTUModel.PredprDolznostRukForeign" />
+        <AssociationConnector Association="UGTUModel.TrudoustrDolznostFG" />
+        <AssociationConnector Association="UGTUModel.VakansDolznostForeign" />
+        <EntityTypeShape EntityType="UGTUModel.Param_Vakans" Width="1.5" PointX="10.125" PointY="2.125" />
+        <EntityTypeShape EntityType="UGTUModel.Parametr" Width="1.5" PointX="7.875" PointY="10.125" />
+        <EntityTypeShape EntityType="UGTUModel.ZnachParam" Width="1.5" PointX="7.875" PointY="7.375" />
+        <AssociationConnector Association="UGTUModel.Param_VakansParametrForeign" />
+        <AssociationConnector Association="UGTUModel.Param_VakansVakansForeign" />
+        <AssociationConnector Association="UGTUModel.Param_VakansZnachParamForeign" />
+        <AssociationConnector Association="UGTUModel.ZnachParamParametrForeign" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

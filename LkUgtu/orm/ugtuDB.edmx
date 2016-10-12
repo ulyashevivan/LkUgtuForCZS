@@ -36,6 +36,32 @@
           <Property Name="PersonSmallName" Type="varchar" MaxLength="34" StoreGeneratedPattern="Computed" Nullable="false" />
           <Property Name="PersName" Type="varchar" MaxLength="92" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
+        <EntityType Name="Dolznost">
+          <Key>
+            <PropertyRef Name="IDDolznost" />
+          </Key>
+          <Property Name="IDDolznost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameDolznost" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Param_Vakans">
+          <Key>
+            <PropertyRef Name="idParam_Vakans" />
+          </Key>
+          <Property Name="idParam_Vakans" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idParam" Type="int" Nullable="false" />
+          <Property Name="idParamZnachVakans" Type="int" />
+          <Property Name="idVakans" Type="int" Nullable="false" />
+          <Property Name="Chislo" Type="int" />
+          <Property Name="Stroka" Type="varchar" MaxLength="500" />
+          <Property Name="Data" Type="date" />
+        </EntityType>
+        <EntityType Name="Parametr">
+          <Key>
+            <PropertyRef Name="idParam" />
+          </Key>
+          <Property Name="idParam" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParamName" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
         <EntityType Name="Predpriyatie">
           <Key>
             <PropertyRef Name="IDPredpriyatie" />
@@ -124,6 +150,86 @@
           <Property Name="ZarPlata" Type="varchar" MaxLength="500" />
           <Property Name="OtdelName" Type="varchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="ZnachParam">
+          <Key>
+            <PropertyRef Name="idZnachParam" />
+          </Key>
+          <Property Name="idZnachParam" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ZnachParamName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="idParam" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="Param_VakansParametrForeign">
+          <End Role="Parametr" Type="Self.Parametr" Multiplicity="1" />
+          <End Role="Param_Vakans" Type="Self.Param_Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametr">
+              <PropertyRef Name="idParam" />
+            </Principal>
+            <Dependent Role="Param_Vakans">
+              <PropertyRef Name="idParam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Param_VakansVakansForeign">
+          <End Role="Vakans" Type="Self.Vakans" Multiplicity="1" />
+          <End Role="Param_Vakans" Type="Self.Param_Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vakans">
+              <PropertyRef Name="idVakans" />
+            </Principal>
+            <Dependent Role="Param_Vakans">
+              <PropertyRef Name="idVakans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Param_VakansZnachParamForeign">
+          <End Role="ZnachParam" Type="Self.ZnachParam" Multiplicity="0..1" />
+          <End Role="Param_Vakans" Type="Self.Param_Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZnachParam">
+              <PropertyRef Name="idZnachParam" />
+            </Principal>
+            <Dependent Role="Param_Vakans">
+              <PropertyRef Name="idParamZnachVakans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PredprDolznostKLicoForeign">
+          <End Role="Dolznost" Type="Self.Dolznost" Multiplicity="0..1" />
+          <End Role="Predpriyatie" Type="Self.Predpriyatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolznost">
+              <PropertyRef Name="IDDolznost" />
+            </Principal>
+            <Dependent Role="Predpriyatie">
+              <PropertyRef Name="IDDolznostKLico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PredprDolznostKLicoTrForeign">
+          <End Role="Dolznost" Type="Self.Dolznost" Multiplicity="0..1" />
+          <End Role="Predpriyatie" Type="Self.Predpriyatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolznost">
+              <PropertyRef Name="IDDolznost" />
+            </Principal>
+            <Dependent Role="Predpriyatie">
+              <PropertyRef Name="IDDolznostKLicoTr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PredprDolznostRukForeign">
+          <End Role="Dolznost" Type="Self.Dolznost" Multiplicity="0..1" />
+          <End Role="Predpriyatie" Type="Self.Predpriyatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolznost">
+              <PropertyRef Name="IDDolznost" />
+            </Principal>
+            <Dependent Role="Predpriyatie">
+              <PropertyRef Name="IDDolznostRuk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ResumeVakansForeign">
           <End Role="Vakans" Type="Self.Vakans" Multiplicity="0..1" />
           <End Role="Resume" Type="Self.Resume" Multiplicity="*" />
@@ -133,6 +239,18 @@
             </Principal>
             <Dependent Role="Resume">
               <PropertyRef Name="idVakans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TrudoustrDolznostFG">
+          <End Role="Dolznost" Type="Self.Dolznost" Multiplicity="0..1" />
+          <End Role="Trudoustr" Type="Self.Trudoustr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolznost">
+              <PropertyRef Name="IDDolznost" />
+            </Principal>
+            <Dependent Role="Trudoustr">
+              <PropertyRef Name="IDDolznost" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -172,6 +290,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="VakansDolznostForeign">
+          <End Role="Dolznost" Type="Self.Dolznost" Multiplicity="1" />
+          <End Role="Vakans" Type="Self.Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolznost">
+              <PropertyRef Name="IDDolznost" />
+            </Principal>
+            <Dependent Role="Vakans">
+              <PropertyRef Name="idDolznost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="VakansPredprForeign">
           <End Role="Predpriyatie" Type="Self.Predpriyatie" Multiplicity="1" />
           <End Role="Vakans" Type="Self.Vakans" Multiplicity="*" />
@@ -184,15 +314,59 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ZnachParamParametrForeign">
+          <End Role="Parametr" Type="Self.Parametr" Multiplicity="1" />
+          <End Role="ZnachParam" Type="Self.ZnachParam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametr">
+              <PropertyRef Name="idParam" />
+            </Principal>
+            <Dependent Role="ZnachParam">
+              <PropertyRef Name="idParam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище UGTUModelContainer">
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dolznost" EntityType="Self.Dolznost" Schema="ShemaCZS" store:Type="Tables" />
+          <EntitySet Name="Param_Vakans" EntityType="Self.Param_Vakans" Schema="ShemaCZS" store:Type="Tables" />
+          <EntitySet Name="Parametr" EntityType="Self.Parametr" Schema="ShemaCZS" store:Type="Tables" />
           <EntitySet Name="Predpriyatie" EntityType="Self.Predpriyatie" Schema="ShemaCZS" store:Type="Tables" />
           <EntitySet Name="Resume" EntityType="Self.Resume" Schema="ShemaCZS" store:Type="Tables" />
           <EntitySet Name="Trudoustr" EntityType="Self.Trudoustr" Schema="ShemaCZS" store:Type="Tables" />
           <EntitySet Name="Vakans" EntityType="Self.Vakans" Schema="ShemaCZS" store:Type="Tables" />
+          <EntitySet Name="ZnachParam" EntityType="Self.ZnachParam" Schema="ShemaCZS" store:Type="Tables" />
+          <AssociationSet Name="Param_VakansParametrForeign" Association="Self.Param_VakansParametrForeign">
+            <End Role="Parametr" EntitySet="Parametr" />
+            <End Role="Param_Vakans" EntitySet="Param_Vakans" />
+          </AssociationSet>
+          <AssociationSet Name="Param_VakansVakansForeign" Association="Self.Param_VakansVakansForeign">
+            <End Role="Vakans" EntitySet="Vakans" />
+            <End Role="Param_Vakans" EntitySet="Param_Vakans" />
+          </AssociationSet>
+          <AssociationSet Name="Param_VakansZnachParamForeign" Association="Self.Param_VakansZnachParamForeign">
+            <End Role="ZnachParam" EntitySet="ZnachParam" />
+            <End Role="Param_Vakans" EntitySet="Param_Vakans" />
+          </AssociationSet>
+          <AssociationSet Name="PredprDolznostKLicoForeign" Association="Self.PredprDolznostKLicoForeign">
+            <End Role="Dolznost" EntitySet="Dolznost" />
+            <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+          </AssociationSet>
+          <AssociationSet Name="PredprDolznostKLicoTrForeign" Association="Self.PredprDolznostKLicoTrForeign">
+            <End Role="Dolznost" EntitySet="Dolznost" />
+            <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+          </AssociationSet>
+          <AssociationSet Name="PredprDolznostRukForeign" Association="Self.PredprDolznostRukForeign">
+            <End Role="Dolznost" EntitySet="Dolznost" />
+            <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+          </AssociationSet>
           <AssociationSet Name="ResumeVakansForeign" Association="Self.ResumeVakansForeign">
             <End Role="Vakans" EntitySet="Vakans" />
             <End Role="Resume" EntitySet="Resume" />
+          </AssociationSet>
+          <AssociationSet Name="TrudoustrDolznostFG" Association="Self.TrudoustrDolznostFG">
+            <End Role="Dolznost" EntitySet="Dolznost" />
+            <End Role="Trudoustr" EntitySet="Trudoustr" />
           </AssociationSet>
           <AssociationSet Name="TrudoustrPredpriyatieFG" Association="Self.TrudoustrPredpriyatieFG">
             <End Role="Predpriyatie" EntitySet="Predpriyatie" />
@@ -206,9 +380,17 @@
             <End Role="Vakans" EntitySet="Vakans" />
             <End Role="Trudoustr" EntitySet="Trudoustr" />
           </AssociationSet>
+          <AssociationSet Name="VakansDolznostForeign" Association="Self.VakansDolznostForeign">
+            <End Role="Dolznost" EntitySet="Dolznost" />
+            <End Role="Vakans" EntitySet="Vakans" />
+          </AssociationSet>
           <AssociationSet Name="VakansPredprForeign" Association="Self.VakansPredprForeign">
             <End Role="Predpriyatie" EntitySet="Predpriyatie" />
             <End Role="Vakans" EntitySet="Vakans" />
+          </AssociationSet>
+          <AssociationSet Name="ZnachParamParametrForeign" Association="Self.ZnachParamParametrForeign">
+            <End Role="Parametr" EntitySet="Parametr" />
+            <End Role="ZnachParam" EntitySet="ZnachParam" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -272,6 +454,46 @@
             <End Role="Vakans" EntitySet="Vakans" />
             <End Role="Trudoustr" EntitySet="Trudoustr" />
           </AssociationSet>
+          <EntitySet Name="Dolznost" EntityType="UGTUModel.Dolznost" />
+          <AssociationSet Name="PredprDolznostKLicoForeign" Association="UGTUModel.PredprDolznostKLicoForeign">
+            <End Role="Dolznost" EntitySet="Dolznost" />
+            <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+          </AssociationSet>
+          <AssociationSet Name="PredprDolznostKLicoTrForeign" Association="UGTUModel.PredprDolznostKLicoTrForeign">
+            <End Role="Dolznost" EntitySet="Dolznost" />
+            <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+          </AssociationSet>
+          <AssociationSet Name="PredprDolznostRukForeign" Association="UGTUModel.PredprDolznostRukForeign">
+            <End Role="Dolznost" EntitySet="Dolznost" />
+            <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+          </AssociationSet>
+          <AssociationSet Name="TrudoustrDolznostFG" Association="UGTUModel.TrudoustrDolznostFG">
+            <End Role="Dolznost" EntitySet="Dolznost" />
+            <End Role="Trudoustr" EntitySet="Trudoustr" />
+          </AssociationSet>
+          <AssociationSet Name="VakansDolznostForeign" Association="UGTUModel.VakansDolznostForeign">
+            <End Role="Dolznost" EntitySet="Dolznost" />
+            <End Role="Vakans" EntitySet="Vakans" />
+          </AssociationSet>
+          <EntitySet Name="Param_Vakans" EntityType="UGTUModel.Param_Vakans" />
+          <EntitySet Name="Parametr" EntityType="UGTUModel.Parametr" />
+          <EntitySet Name="ZnachParam" EntityType="UGTUModel.ZnachParam" />
+          <AssociationSet Name="Param_VakansParametrForeign" Association="UGTUModel.Param_VakansParametrForeign">
+            <End Role="Parametr" EntitySet="Parametr" />
+            <End Role="Param_Vakans" EntitySet="Param_Vakans" />
+          </AssociationSet>
+          <AssociationSet Name="Param_VakansVakansForeign" Association="UGTUModel.Param_VakansVakansForeign">
+            <End Role="Vakans" EntitySet="Vakans" />
+            <End Role="Param_Vakans" EntitySet="Param_Vakans" />
+          </AssociationSet>
+          <AssociationSet Name="Param_VakansZnachParamForeign" Association="UGTUModel.Param_VakansZnachParamForeign">
+            <End Role="ZnachParam" EntitySet="ZnachParam" />
+            <End Role="Param_Vakans" EntitySet="Param_Vakans" />
+          </AssociationSet>
+          <AssociationSet Name="ZnachParamParametrForeign" Association="UGTUModel.ZnachParamParametrForeign">
+            <End Role="Parametr" EntitySet="Parametr" />
+            <End Role="ZnachParam" EntitySet="ZnachParam" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Vakans">
           <Key>
@@ -297,6 +519,8 @@
           <NavigationProperty Name="Predpriyatie" Relationship="UGTUModel.VakansPredprForeign" FromRole="Vakans" ToRole="Predpriyatie" />
           <NavigationProperty Name="Resume" Relationship="UGTUModel.ResumeVakansForeign" FromRole="Vakans" ToRole="Resume" />
           <NavigationProperty Name="Trudoustr" Relationship="UGTUModel.TrudoustrVakansFG" FromRole="Vakans" ToRole="Trudoustr" />
+          <NavigationProperty Name="Dolznost" Relationship="UGTUModel.VakansDolznostForeign" FromRole="Vakans" ToRole="Dolznost" />
+          <NavigationProperty Name="Param_Vakans" Relationship="UGTUModel.Param_VakansVakansForeign" FromRole="Vakans" ToRole="Param_Vakans" />
         </EntityType>
         <EntityType Name="Predpriyatie">
           <Key>
@@ -328,6 +552,9 @@
           <Property Name="WebSite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Vakans" Relationship="UGTUModel.VakansPredprForeign" FromRole="Predpriyatie" ToRole="Vakans" />
           <NavigationProperty Name="Trudoustr" Relationship="UGTUModel.TrudoustrPredpriyatieFG" FromRole="Predpriyatie" ToRole="Trudoustr" />
+          <NavigationProperty Name="Dolznost" Relationship="UGTUModel.PredprDolznostKLicoForeign" FromRole="Predpriyatie" ToRole="Dolznost" />
+          <NavigationProperty Name="Dolznost1" Relationship="UGTUModel.PredprDolznostKLicoTrForeign" FromRole="Predpriyatie" ToRole="Dolznost" />
+          <NavigationProperty Name="Dolznost2" Relationship="UGTUModel.PredprDolznostRukForeign" FromRole="Predpriyatie" ToRole="Dolznost" />
         </EntityType>
         <Association Name="VakansPredprForeign">
           <End Type="UGTUModel.Predpriyatie" Role="Predpriyatie" Multiplicity="1" />
@@ -394,6 +621,7 @@
           <NavigationProperty Name="Predpriyatie" Relationship="UGTUModel.TrudoustrPredpriyatieFG" FromRole="Trudoustr" ToRole="Predpriyatie" />
           <NavigationProperty Name="Resume" Relationship="UGTUModel.TrudoustrResumeFG" FromRole="Trudoustr" ToRole="Resume" />
           <NavigationProperty Name="Vakans" Relationship="UGTUModel.TrudoustrVakansFG" FromRole="Trudoustr" ToRole="Vakans" />
+          <NavigationProperty Name="Dolznost" Relationship="UGTUModel.TrudoustrDolznostFG" FromRole="Trudoustr" ToRole="Dolznost" />
         </EntityType>
         <Association Name="TrudoustrPredpriyatieFG">
           <End Type="UGTUModel.Predpriyatie" Role="Predpriyatie" Multiplicity="1" />
@@ -428,6 +656,160 @@
             </Principal>
             <Dependent Role="Trudoustr">
               <PropertyRef Name="IDVakans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Dolznost">
+          <Key>
+            <PropertyRef Name="IDDolznost" />
+          </Key>
+          <Property Name="IDDolznost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameDolznost" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Predpriyatie" Relationship="UGTUModel.PredprDolznostKLicoForeign" FromRole="Dolznost" ToRole="Predpriyatie" />
+          <NavigationProperty Name="Predpriyatie1" Relationship="UGTUModel.PredprDolznostKLicoTrForeign" FromRole="Dolznost" ToRole="Predpriyatie" />
+          <NavigationProperty Name="Predpriyatie2" Relationship="UGTUModel.PredprDolznostRukForeign" FromRole="Dolznost" ToRole="Predpriyatie" />
+          <NavigationProperty Name="Trudoustr" Relationship="UGTUModel.TrudoustrDolznostFG" FromRole="Dolznost" ToRole="Trudoustr" />
+          <NavigationProperty Name="Vakans" Relationship="UGTUModel.VakansDolznostForeign" FromRole="Dolznost" ToRole="Vakans" />
+        </EntityType>
+        <Association Name="PredprDolznostKLicoForeign">
+          <End Type="UGTUModel.Dolznost" Role="Dolznost" Multiplicity="0..1" />
+          <End Type="UGTUModel.Predpriyatie" Role="Predpriyatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolznost">
+              <PropertyRef Name="IDDolznost" />
+            </Principal>
+            <Dependent Role="Predpriyatie">
+              <PropertyRef Name="IDDolznostKLico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PredprDolznostKLicoTrForeign">
+          <End Type="UGTUModel.Dolznost" Role="Dolznost" Multiplicity="0..1" />
+          <End Type="UGTUModel.Predpriyatie" Role="Predpriyatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolznost">
+              <PropertyRef Name="IDDolznost" />
+            </Principal>
+            <Dependent Role="Predpriyatie">
+              <PropertyRef Name="IDDolznostKLicoTr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PredprDolznostRukForeign">
+          <End Type="UGTUModel.Dolznost" Role="Dolznost" Multiplicity="0..1" />
+          <End Type="UGTUModel.Predpriyatie" Role="Predpriyatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolznost">
+              <PropertyRef Name="IDDolznost" />
+            </Principal>
+            <Dependent Role="Predpriyatie">
+              <PropertyRef Name="IDDolznostRuk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TrudoustrDolznostFG">
+          <End Type="UGTUModel.Dolznost" Role="Dolznost" Multiplicity="0..1" />
+          <End Type="UGTUModel.Trudoustr" Role="Trudoustr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolznost">
+              <PropertyRef Name="IDDolznost" />
+            </Principal>
+            <Dependent Role="Trudoustr">
+              <PropertyRef Name="IDDolznost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VakansDolznostForeign">
+          <End Type="UGTUModel.Dolznost" Role="Dolznost" Multiplicity="1" />
+          <End Type="UGTUModel.Vakans" Role="Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dolznost">
+              <PropertyRef Name="IDDolznost" />
+            </Principal>
+            <Dependent Role="Vakans">
+              <PropertyRef Name="idDolznost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Param_Vakans">
+          <Key>
+            <PropertyRef Name="idParam_Vakans" />
+          </Key>
+          <Property Name="idParam_Vakans" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idParam" Type="Int32" Nullable="false" />
+          <Property Name="idParamZnachVakans" Type="Int32" />
+          <Property Name="idVakans" Type="Int32" Nullable="false" />
+          <Property Name="Chislo" Type="Int32" />
+          <Property Name="Stroka" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Parametr" Relationship="UGTUModel.Param_VakansParametrForeign" FromRole="Param_Vakans" ToRole="Parametr" />
+          <NavigationProperty Name="Vakans" Relationship="UGTUModel.Param_VakansVakansForeign" FromRole="Param_Vakans" ToRole="Vakans" />
+          <NavigationProperty Name="ZnachParam" Relationship="UGTUModel.Param_VakansZnachParamForeign" FromRole="Param_Vakans" ToRole="ZnachParam" />
+        </EntityType>
+        <EntityType Name="Parametr">
+          <Key>
+            <PropertyRef Name="idParam" />
+          </Key>
+          <Property Name="idParam" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParamName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Param_Vakans" Relationship="UGTUModel.Param_VakansParametrForeign" FromRole="Parametr" ToRole="Param_Vakans" />
+          <NavigationProperty Name="ZnachParam" Relationship="UGTUModel.ZnachParamParametrForeign" FromRole="Parametr" ToRole="ZnachParam" />
+        </EntityType>
+        <EntityType Name="ZnachParam">
+          <Key>
+            <PropertyRef Name="idZnachParam" />
+          </Key>
+          <Property Name="idZnachParam" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZnachParamName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="idParam" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Param_Vakans" Relationship="UGTUModel.Param_VakansZnachParamForeign" FromRole="ZnachParam" ToRole="Param_Vakans" />
+          <NavigationProperty Name="Parametr" Relationship="UGTUModel.ZnachParamParametrForeign" FromRole="ZnachParam" ToRole="Parametr" />
+        </EntityType>
+        <Association Name="Param_VakansParametrForeign">
+          <End Type="UGTUModel.Parametr" Role="Parametr" Multiplicity="1" />
+          <End Type="UGTUModel.Param_Vakans" Role="Param_Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametr">
+              <PropertyRef Name="idParam" />
+            </Principal>
+            <Dependent Role="Param_Vakans">
+              <PropertyRef Name="idParam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Param_VakansVakansForeign">
+          <End Type="UGTUModel.Vakans" Role="Vakans" Multiplicity="1" />
+          <End Type="UGTUModel.Param_Vakans" Role="Param_Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vakans">
+              <PropertyRef Name="idVakans" />
+            </Principal>
+            <Dependent Role="Param_Vakans">
+              <PropertyRef Name="idVakans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Param_VakansZnachParamForeign">
+          <End Type="UGTUModel.ZnachParam" Role="ZnachParam" Multiplicity="0..1" />
+          <End Type="UGTUModel.Param_Vakans" Role="Param_Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZnachParam">
+              <PropertyRef Name="idZnachParam" />
+            </Principal>
+            <Dependent Role="Param_Vakans">
+              <PropertyRef Name="idParamZnachVakans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ZnachParamParametrForeign">
+          <End Type="UGTUModel.Parametr" Role="Parametr" Multiplicity="1" />
+          <End Type="UGTUModel.ZnachParam" Role="ZnachParam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametr">
+              <PropertyRef Name="idParam" />
+            </Principal>
+            <Dependent Role="ZnachParam">
+              <PropertyRef Name="idParam" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -558,6 +940,44 @@
                 <ScalarProperty Name="IDDolznost" ColumnName="IDDolznost" />
                 <ScalarProperty Name="IDStudent" ColumnName="IDStudent" />
                 <ScalarProperty Name="IDTrudoustr" ColumnName="IDTrudoustr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dolznost">
+            <EntityTypeMapping TypeName="UGTUModel.Dolznost">
+              <MappingFragment StoreEntitySet="Dolznost">
+                <ScalarProperty Name="NameDolznost" ColumnName="NameDolznost" />
+                <ScalarProperty Name="IDDolznost" ColumnName="IDDolznost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Param_Vakans">
+            <EntityTypeMapping TypeName="UGTUModel.Param_Vakans">
+              <MappingFragment StoreEntitySet="Param_Vakans">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Stroka" ColumnName="Stroka" />
+                <ScalarProperty Name="Chislo" ColumnName="Chislo" />
+                <ScalarProperty Name="idVakans" ColumnName="idVakans" />
+                <ScalarProperty Name="idParamZnachVakans" ColumnName="idParamZnachVakans" />
+                <ScalarProperty Name="idParam" ColumnName="idParam" />
+                <ScalarProperty Name="idParam_Vakans" ColumnName="idParam_Vakans" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parametr">
+            <EntityTypeMapping TypeName="UGTUModel.Parametr">
+              <MappingFragment StoreEntitySet="Parametr">
+                <ScalarProperty Name="ParamName" ColumnName="ParamName" />
+                <ScalarProperty Name="idParam" ColumnName="idParam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZnachParam">
+            <EntityTypeMapping TypeName="UGTUModel.ZnachParam">
+              <MappingFragment StoreEntitySet="ZnachParam">
+                <ScalarProperty Name="idParam" ColumnName="idParam" />
+                <ScalarProperty Name="ZnachParamName" ColumnName="ZnachParamName" />
+                <ScalarProperty Name="idZnachParam" ColumnName="idZnachParam" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

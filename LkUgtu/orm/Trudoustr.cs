@@ -35,5 +35,6 @@ namespace LkUgtu.orm
         public virtual Predpriyatie Predpriyatie { get; set; }
         public virtual Resume Resume { get; set; }
         public virtual Vakans Vakans { get; set; }
+        public virtual Dolznost Dolznost { get; set; }
     }
 }

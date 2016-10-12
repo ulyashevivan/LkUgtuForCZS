@@ -35,6 +35,17 @@ namespace LkUgtu.Controllers
             }
         }
 
+        public ActionResult GetModalViewVakansList()
+        {
+            var model = new VakansListDTO().vakans;
+            return PartialView("ModalViewVakansList", model);
+
+        }
+        //public ActionResult GetVakansModalViewVakansList()
+        //{
+        //    var model = new VakansListDTO().vakans;
+        //    return PartialView("ModalViewVakansList", model);
+        //}
 
         //public ActionResult VakansPanel(AllInfo info)
         //{

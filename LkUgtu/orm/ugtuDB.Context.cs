@@ -30,5 +30,9 @@ namespace LkUgtu.orm
         public virtual DbSet<Predpriyatie> Predpriyatie { get; set; }
         public virtual DbSet<Resume> Resume { get; set; }
         public virtual DbSet<Trudoustr> Trudoustr { get; set; }
+        public virtual DbSet<Dolznost> Dolznost { get; set; }
+        public virtual DbSet<Param_Vakans> Param_Vakans { get; set; }
+        public virtual DbSet<Parametr> Parametr { get; set; }
+        public virtual DbSet<ZnachParam> ZnachParam { get; set; }
     }
 }

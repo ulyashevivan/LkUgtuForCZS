@@ -12,41 +12,30 @@ namespace LkUgtu.orm
     using System;
     using System.Collections.Generic;
     
-    public partial class Vakans
+    public partial class Dolznost
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Vakans()
+        public Dolznost()
         {
-            this.Resume = new HashSet<Resume>();
+            this.Predpriyatie = new HashSet<Predpriyatie>();
+            this.Predpriyatie1 = new HashSet<Predpriyatie>();
+            this.Predpriyatie2 = new HashSet<Predpriyatie>();
             this.Trudoustr = new HashSet<Trudoustr>();
-            this.Param_Vakans = new HashSet<Param_Vakans>();
+            this.Vakans = new HashSet<Vakans>();
         }
     
-        public int idVakans { get; set; }
-        public int idPredpr { get; set; }
-        public Nullable<int> idGorod { get; set; }
-        public int idDolznost { get; set; }
-        public int idStatus { get; set; }
-        public string DolgnostnObyazan { get; set; }
-        public int KolChel { get; set; }
-        public string InfoGrafikRab { get; set; }
-        public string Lgoty { get; set; }
-        public Nullable<bool> LichnoeAvto { get; set; }
-        public string DopInfo { get; set; }
-        public string VakansName { get; set; }
-        public System.DateTime DataPostVakans { get; set; }
-        public Nullable<System.DateTime> DataObzvon { get; set; }
-        public string TrebKandidat { get; set; }
-        public string ZarPlata { get; set; }
-        public string OtdelName { get; set; }
+        public int IDDolznost { get; set; }
+        public string NameDolznost { get; set; }
     
-        public virtual Predpriyatie Predpriyatie { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Resume> Resume { get; set; }
+        public virtual ICollection<Predpriyatie> Predpriyatie { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Predpriyatie> Predpriyatie1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Predpriyatie> Predpriyatie2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Trudoustr> Trudoustr { get; set; }
-        public virtual Dolznost Dolznost { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Param_Vakans> Param_Vakans { get; set; }
+        public virtual ICollection<Vakans> Vakans { get; set; }
     }
 }

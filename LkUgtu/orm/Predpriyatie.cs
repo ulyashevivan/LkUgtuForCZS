@@ -50,5 +50,8 @@ namespace LkUgtu.orm
         public virtual ICollection<Vakans> Vakans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Trudoustr> Trudoustr { get; set; }
+        public virtual Dolznost Dolznost { get; set; }
+        public virtual Dolznost Dolznost1 { get; set; }
+        public virtual Dolznost Dolznost2 { get; set; }
     }
 }
