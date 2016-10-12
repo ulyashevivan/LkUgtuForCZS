@@ -37,9 +37,20 @@ namespace LkUgtu.Controllers
 
         public ActionResult GetModalViewVakansList()
         {
-            var model = new VakansListDTO().vakans;
-            return PartialView("ModalViewVakansList", model);
-
+            return PartialView("ModalViewVakansList");
+        }
+        public ActionResult GetModalViewTrudoustrList()
+        {
+            return PartialView("ModalViewTrudoustrList");
+        }
+        public JsonResult GetAllVakans(string search)
+        {
+            return Json((search==null)?new VakansListDTO().vakans:new VakansListDTO().vakans.Where(p=>p.post.ToLower().Contains(search)), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetAllTrudoustr(int idStud)
+        {
+            var p = idStud; 
+            return Json(new TrudoustrListDTO(idStud).trudoustrs, JsonRequestBehavior.AllowGet);
         }
         //public ActionResult GetVakansModalViewVakansList()
         //{

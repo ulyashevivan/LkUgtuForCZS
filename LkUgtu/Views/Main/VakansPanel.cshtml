@@ -12,9 +12,9 @@
                 <li id="buttViewVakansList" >
                     <a style="padding: 5px" title="Посмотреть вакансии" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-eye-open"></span></a>
                 </li>
-                <li>
+               <!--<li>
                     <a style="padding: 5px" title="Подобрать вакансии" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-cog"></span></a>
-                </li>
+                </li>-->
             </ul>
         </div>
         <div class="panel-body" style="padding-bottom: 5px">
@@ -24,17 +24,65 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" data-url="@Url.Action("GetModalViewVakansList")">
-</div>
+
 
 <script>
         $('#buttViewVakansList').click(function () {
-            var url = $('#myModal').data('url');
+            var url = "@Url.Action("GetModalViewVakansList")";
             $.get(url, function (data) {
                 $('#myModal').html(data);
                 $('#myModal').appendTo('body').modal('show');
+                //$('#tableVakansList')
+                //    .append(
+                //    $(document.createElement('div')).attr({
+                //        class:'progress'
+                //    })
+                //        .append(
+                //            $(document.createElement('div')).attr({
+                //                class: 'progress-bar progress-bar-striped active'
+                //                ,role: 'progressbar'
+                //                ,'aria-valuenow': '50'
+                //                ,'aria-valuemin': '0'
+                //                ,'aria-valuemax': '100'
+                //                ,style:'width:50%'
+                //            }).html('50%')));
+                $.ajax({
+                    url: '@Url.Action("GetAllVakans")',
+                    success: function (vakans) {
+                        for(var i =0; i<vakans.length;i++){
+                            $('#tableVakansList')
+                                 .append(
+                                 $(document.createElement('tr'))
+                                      .append(
+                                     $(document.createElement('td'))
+                                         .append(
+                                         $(document.createElement('span')).html(i+". " + vakans[i].post)))
+                                      .append(
+                                     $(document.createElement('td'))
+                                         .append(
+                                         $(document.createElement('span')).html(vakans[i].company)))
+                                      .append(
+                                     $(document.createElement('td'))
+                                         .append(
+                                         $(document.createElement('span')).html(vakans[i].salary)))
+                                      .append(
+                                     $(document.createElement('td'))
+                                         .append(
+                                         $(document.createElement('span')).html(vakans[i].employment)))
+                                            .append(
+                                     $(document.createElement('td'))
+                                         .append(
+                                         $(document.createElement('span')).html(vakans[i].shedule)))
+                                            .append(
+                                     $(document.createElement('td'))
+                                         .append(
+                                         $(document.createElement('span')).html(vakans[i].otherInfo))));
+                        }
+                    }
+                });
+
             });
         });
+
 </script>
 

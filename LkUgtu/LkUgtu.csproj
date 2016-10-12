@@ -198,6 +198,7 @@
     <Compile Include="Models\czsCONSTs.cs" />
     <Compile Include="Models\DTOClassConstructor.cs" />
     <Compile Include="Models\IndexDTO.cs" />
+    <Compile Include="Models\TrudoustrDTO.cs" />
     <Compile Include="Models\VakansDTO.cs" />
     <Compile Include="oAuthLkUgtuProvider.cs" />
     <Compile Include="orm\Dolznost.cs">
@@ -255,6 +256,7 @@
     <Content Include="Views\Main\TrudoustrPanel.cshtml" />
     <Content Include="Scripts\jquery-2.2.4.min.map" />
     <Content Include="Views\Main\ModalViewVakansList.cshtml" />
+    <Content Include="Views\Main\ModalViewTrudoustrList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

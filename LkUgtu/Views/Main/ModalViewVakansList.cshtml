@@ -1,17 +1,14 @@
-﻿@model List<LkUgtu.Models.VakansDTO>
-<div class="modal-dialog">
+﻿<div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Список вакансий</h4>
+            <input class="form-control" id="searchVakansControl" type="text" placeholder="Поиск по вакансиям" />
         </div>
         <div class="modal-body">
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>
-                            #
-                        </th>
                         <th >
                            Должность
                         </th>
@@ -32,32 +29,59 @@
                         </th>  
                     </tr>
                 </thead>
-                <tbody>
-                @for(int i=0; i<Model.Count();i++)
-                {
-                    <tr >
-                        <td>
-                            #@i
-                        </td>
-                        <td>@Model[i].post</td>
-                        <td>@Model[i].company</td>
-                        <td>@Model[i].salary</td>
-                        <td>@Model[i].employment</td>
-                        <td>@Model[i].schedule</td>
-                        <td>@Model[i].otherInfo</td>
-                        
-                    </tr>
-                }
+                <tbody id="tableVakansList">
+
                 </tbody>
             </table>
         </div>
         <div class="modal-footer">
             <div class="pull-left">
-                <h5 class="pull-right">Всего  вакансий: @Model.Count()</h5>
+                <h5 class="pull-right">Всего  вакансий:</h5>
             </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close1</button>
-            <button type="button" class="btn btn-primary">Close2</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
         </div>
     </div>
 </div>
+<script>
+    $('#searchVakansControl').keyup(function () {
+        $.ajax({
+            url: '@Url.Action("GetAllVakans")',
+            data: { search: $('#searchVakansControl').val() },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (vakans) {
+                $('#tableVakansList').html('');
+                for (var i = 0; i < vakans.length; i++) {
+                    $('#tableVakansList')
+                         .append(
+                         $(document.createElement('tr'))
+                              .append(
+                             $(document.createElement('td'))
+                                 .append(
+                                 $(document.createElement('span')).html(i+". "+vakans[i].post)))
+                              .append(
+                             $(document.createElement('td'))
+                                 .append(
+                                 $(document.createElement('span')).html(vakans[i].company)))
+                              .append(
+                             $(document.createElement('td'))
+                                 .append(
+                                 $(document.createElement('span')).html(vakans[i].salary)))
+                              .append(
+                             $(document.createElement('td'))
+                                 .append(
+                                 $(document.createElement('span')).html(vakans[i].employment)))
+                                    .append(
+                             $(document.createElement('td'))
+                                 .append(
+                                 $(document.createElement('span')).html(vakans[i].shedule)))
+                                    .append(
+                             $(document.createElement('td'))
+                                 .append(
+                                 $(document.createElement('span')).html(vakans[i].otherInfo))));
+                }
+            }
+        });
+    });
+</script>
 
