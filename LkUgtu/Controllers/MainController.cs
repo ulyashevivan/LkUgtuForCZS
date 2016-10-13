@@ -43,14 +43,22 @@ namespace LkUgtu.Controllers
         {
             return PartialView("ModalViewTrudoustrList");
         }
+        public ActionResult GetModalViewTrudoustrEdit()
+        {
+            return PartialView("ModalViewTrudoustrEdit");
+        }
         public JsonResult GetAllVakans(string search)
         {
             return Json((search==null)?new VakansListDTO().vakans:new VakansListDTO().vakans.Where(p=>p.post.ToLower().Contains(search)), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetAllTrudoustr(int idStud)
-        {
-            var p = idStud; 
+        { 
             return Json(new TrudoustrListDTO(idStud).trudoustrs, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetTrudoustr(int idTrud)
+        {
+            var idStud = 24611;
+            return Json(new TrudoustrListDTO(idStud).trudoustrs.Where(t=>t.idTrud == idTrud), JsonRequestBehavior.AllowGet);
         }
         //public ActionResult GetVakansModalViewVakansList()
         //{

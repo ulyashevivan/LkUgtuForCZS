@@ -257,6 +257,7 @@
     <Content Include="Scripts\jquery-2.2.4.min.map" />
     <Content Include="Views\Main\ModalViewVakansList.cshtml" />
     <Content Include="Views\Main\ModalViewTrudoustrList.cshtml" />
+    <Content Include="Views\Main\ModalViewTrudoustrEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

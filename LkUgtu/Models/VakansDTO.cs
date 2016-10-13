@@ -8,6 +8,7 @@ namespace LkUgtu.Models
 {
     public class VakansDTO
     {
+        public int idVakans { get; set; }
         public string post { get; set; }
         public string company { get; set; }
         public string salary { get; set; }

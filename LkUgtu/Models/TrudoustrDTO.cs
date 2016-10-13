@@ -8,6 +8,7 @@ namespace LkUgtu.Models
 {
     public class TrudoustrDTO
     {
+        public int idTrud { get; set; }
         public decimal idStud { get; set; }
         public string post { get; set; }
         public string company { get; set; }

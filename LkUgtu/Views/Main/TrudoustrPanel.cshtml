@@ -14,9 +14,9 @@
                 <li id="buttViewTrudoustrList">
                     <a style="padding: 5px" title="Все мои трудоустройства" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-eye-open"></span></a>
                 </li>
-                <li>
+                <!--<li>
                     <a style="padding: 5px" title="Внести поправку к уже имеющимся трудоустройствам" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-cog"></span></a>
-                </li>
+                </li>-->
             </ul>
         </div>
         <div class="panel-body" style="padding-bottom: 5px">
@@ -27,6 +27,7 @@
 </div>
 
 <script>
+
     $('#buttViewTrudoustrList').click(function () {
         var url = "@Url.Action("GetModalViewTrudoustrList")";
         $.get(url, function (data) {
@@ -52,10 +53,81 @@
                 contentType: "application/json",
                 dataType: "json",
                 success: function (tr) {
-                    alert(JSON.stringify(tr));
+                    for (var i = 0; i < tr.length; i++) {
+                        $('#tableTrudoustrList')
+                             .append(
+                             $(document.createElement('tr'))
+                               .append(
+                                 $(document.createElement('td'))
+                                     .append(
+                                     $(document.createElement('a')).attr({
+                                         'class': 'glyphicon glyphicon-pencil editTrud'
+                                         ,data:tr[i].idTrud
+                                     })))
+                                  .append(
+                                 $(document.createElement('td'))
+                                     .append(
+                                     $(document.createElement('span')).html(i + ". " + tr[i].post)))
+                                  .append(
+                                 $(document.createElement('td'))
+                                     .append(
+                                     $(document.createElement('span')).html(tr[i].company)))
+                                  .append(
+                                 $(document.createElement('td'))
+                                     .append(
+                                     $(document.createElement('span')).html((tr[i].department == null) ? '' : tr[i].department)))
+                                  .append(
+                                 $(document.createElement('td'))
+                                     .append(
+                                     $(document.createElement('span')).html((tr[i].dateStart == null) ? '' : new Date(parseInt(tr[i].dateStart.substr(6))).toLocaleDateString() + ' - ' + new Date(parseInt(tr[i].dateStop.substr(6))).toLocaleDateString())))
+                                  .append(
+                                 $(document.createElement('td'))
+                                     .append(
+                                     $(document.createElement('span')).html(tr[i].salary)))
+                                        .append(
+                                 $(document.createElement('td'))
+                                     .append(
+                                     $(document.createElement('span')).html(tr[i].otherInfo)))
+                                 .append(
+                                 $(document.createElement('td'))
+                                     .append(
+                                     $(document.createElement('span')).html(new Date(parseInt(tr[i].dateCall.substr(6))).toLocaleDateString())))
+                                .append(
+                                 $(document.createElement('td'))
+                                     .append(
+                                     $(document.createElement('span')).html((tr[i].isWorkSpecialty)?'Да':'Нет')))
+                                .append(
+                                 $(document.createElement('td'))
+                                     .append(
+                                     $(document.createElement('span')).html((tr[i].withSpravka)?'Да':'Нет')))
+                                .append(
+                                 $(document.createElement('td'))
+                                     .append(
+                                     $(document.createElement('span')).html((tr[i].isPractik)?'Да':'Нет'))));
+
+                    }
                 }
             });
 
         });
+    });
+    $(document).on('click', '.editTrud', function () {
+        var idt = $(this).attr('data');
+        var url = "@Url.Action("GetModalViewTrudoustrEdit")";
+        $.get(url, function (data) {
+            $('#myModalEdit').html(data);
+            $('#myModalEdit').appendTo('body').modal('show');
+        });
+
+        $.ajax({
+            url: '@Url.Action("GetTrudoustr")',
+            data: { idTrud: idt },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (t) {
+                alert(JSON.stringify(t));
+            }
+        });
+
     });
 </script>

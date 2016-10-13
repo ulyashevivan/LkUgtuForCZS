@@ -12,6 +12,7 @@ namespace LkUgtu.Models
         {
             return new VakansDTO()
             {
+                idVakans = v.idVakans,
                 company = v.Predpriyatie.Name,
                 otherInfo = v.DopInfo,
                 salary = v.ZarPlata,
@@ -25,6 +26,7 @@ namespace LkUgtu.Models
         {
             return new TrudoustrDTO()
             {
+                idTrud = t.IDTrudoustr,
                 idStud = t.IDStudent,
                 company = t.Predpriyatie.Name,
                 post = t.Dolznost.NameDolznost,
