@@ -28,8 +28,8 @@ namespace LkUgtu.Models
             {
                 idTrud = t.IDTrudoustr,
                 idStud = t.IDStudent,
-                company = t.Predpriyatie.Name,
-                post = t.Dolznost.NameDolznost,
+                company = new PredpriyatieDTO() {id=t.Predpriyatie.IDPredpriyatie, name=t.Predpriyatie.Name },
+                post = new DolznostDTO() { id = t.Dolznost.IDDolznost, name = t.Dolznost.NameDolznost },
                 salary = t.ZarPlata,
                 department = t.Otdel,
                 otherInfo = t.DopInfo,

@@ -10,8 +10,8 @@ namespace LkUgtu.Models
     {
         public int idTrud { get; set; }
         public decimal idStud { get; set; }
-        public string post { get; set; }
-        public string company { get; set; }
+        public DolznostDTO post { get; set; }
+        public PredpriyatieDTO company { get; set; }
         public string department { get; set; }
         public Nullable<DateTime> dateStart { get; set; }
         public Nullable<DateTime> dateStop { get; set; }

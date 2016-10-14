@@ -34,15 +34,26 @@ namespace LkUgtu.Controllers
                 return View("Error", "Вы не являетесь студентом или сотрудником УГТУ");
             }
         }
-
+        /// <summary>
+        /// Получение модального окна для списка вакансий
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetModalViewVakansList()
         {
             return PartialView("ModalViewVakansList");
         }
+        /// <summary>
+        /// Получение модального окна для списка трудоустройств
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetModalViewTrudoustrList()
         {
             return PartialView("ModalViewTrudoustrList");
         }
+        /// <summary>
+        /// Получение модального окна для редктирования трудоустройства
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetModalViewTrudoustrEdit()
         {
             return PartialView("ModalViewTrudoustrEdit");
@@ -57,7 +68,7 @@ namespace LkUgtu.Controllers
         }
         public JsonResult GetTrudoustr(int idTrud)
         {
-            var idStud = 24611;
+            var idStud = 29124;
             return Json(new TrudoustrListDTO(idStud).trudoustrs.Where(t=>t.idTrud == idTrud), JsonRequestBehavior.AllowGet);
         }
         //public ActionResult GetVakansModalViewVakansList()

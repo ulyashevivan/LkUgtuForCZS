@@ -49,7 +49,7 @@
             //            }).html('50%')));
             $.ajax({
                 url: '@Url.Action("GetAllTrudoustr")',
-                data: { idStud: '24611' },
+                data: { idStud: '29124' },
                 contentType: "application/json",
                 dataType: "json",
                 success: function (tr) {
@@ -67,11 +67,11 @@
                                   .append(
                                  $(document.createElement('td'))
                                      .append(
-                                     $(document.createElement('span')).html(i + ". " + tr[i].post)))
+                                     $(document.createElement('span')).html(i + ". " + tr[i].post.name)))
                                   .append(
                                  $(document.createElement('td'))
                                      .append(
-                                     $(document.createElement('span')).html(tr[i].company)))
+                                     $(document.createElement('span')).html(tr[i].company.name)))
                                   .append(
                                  $(document.createElement('td'))
                                      .append(
@@ -124,8 +124,19 @@
             data: { idTrud: idt },
             contentType: "application/json",
             dataType: "json",
-            success: function (t) {
-                alert(JSON.stringify(t));
+            success: function (tr) {
+                var t = tr[0];
+                $('#inputPredpr').val(t.company.name);
+                $('#inputPost').val(t.post.name);
+                $('#inputDepartment').val(t.department);
+                $('#inputSalary').val(t.salary);
+                $('#inputDateStart').val(new Date(parseInt(t.dateStart.substr(6))).toLocaleDateString());
+                $('#inputDateStop').val(new Date(parseInt(t.dateStop.substr(6))).toLocaleDateString());
+                $('#inputOtherInfo').val(t.otherInfo);
+                $('#checkIsSpeciality').val(t.isWorkSpecialty);
+                $('#checkWithSpravka').val(t.withSpravka);
+                $('#checkIsPraktik').val(t.isPractik);
+                $('#inputDateAdd').val(new Date(parseInt(t.dateCall.substr(6))).toLocaleDateString());
             }
         });
 

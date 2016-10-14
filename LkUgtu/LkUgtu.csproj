@@ -196,8 +196,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\czsCONSTs.cs" />
+    <Compile Include="Models\DolznostDTO.cs" />
     <Compile Include="Models\DTOClassConstructor.cs" />
     <Compile Include="Models\IndexDTO.cs" />
+    <Compile Include="Models\PredpriyatieDTO.cs" />
     <Compile Include="Models\TrudoustrDTO.cs" />
     <Compile Include="Models\VakansDTO.cs" />
     <Compile Include="oAuthLkUgtuProvider.cs" />
