@@ -21,6 +21,14 @@ namespace LkUgtu.Models
         public bool? isWorkSpecialty { get; set; }
         public bool? withSpravka { get; set; }
         public bool? isPractik { get; set; }
+        public List<DepartmentDTO> getalldep()
+        {
+            using (var db = new UGTUEntities())
+            {
+                var tr = db.Trudoustr.ToList();
+                return tr.Select(d=>DTOClassConstructor.DepartmentDTO(d)).Where(d=>d.name!=null).Distinct().ToList();
+            }
+        }
     }
 
     public class TrudoustrListDTO
@@ -34,6 +42,27 @@ namespace LkUgtu.Models
                 var t = db.Trudoustr.Where(s=>s.IDStudent == idStud).ToList();
                 this.trudoustrs = t.Select(s => DTOClassConstructor.TrudoustrDTO(s)).ToList();
             }
+        }
+    }
+    public class DepartmentDTO: IEquatable<DepartmentDTO>
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+
+        public bool Equals(DepartmentDTO other)
+        {
+            if (this.name == other.name)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public override int GetHashCode()
+        {
+            return this.name.GetHashCode();
         }
     }
 }

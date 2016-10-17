@@ -2,60 +2,60 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Правка трудоустройства </h4>
+            <h4 class="modal-title" id="myModalLabel">@ViewBag.action трудоустройства </h4>
         </div>
         <div class="modal-body" id="contTrudoustrEdit">
 
-            <form>
+            <form id="contTrud">
                 <div class="form-group">
                     <label for="inputPredpr">Предприятие</label>
-                    <input type="text" class="form-control" id="inputPredpr" placeholder="Предприятие">
+                    <input type="text" class="form-control" name="inputPredpr" id="inputPredpr" autocomplete="off" placeholder="Предприятие">
                     <p class="help-block">Обязательное поле.</p>
                 </div>
                 <div class="form-group">
                     <label for="inputPost">Должнось</label>
-                    <input type="text" class="form-control" id="inputPost" placeholder="Должнось">
+                    <input type="text" class="form-control" name="inputPost" id="inputPost"  autocomplete="off" placeholder="Должнось">
                     <p class="help-block">Обязательное поле.</p>
                 </div>
                 <div class="form-group">
                     <label for="inputDepartment">Отдел</label>
-                    <input type="text" class="form-control" id="inputDepartment" placeholder="Отдел">
+                    <input type="text" class="form-control" name="inputDepartment" id="inputDepartment"  autocomplete="off" placeholder="Отдел">
                 </div>
                 <div class="form-group">
                     <label for="inputSalary">Заработная плата</label>
-                    <input type="text" class="form-control" id="inputSalary" placeholder="Заработная плата">
+                    <input type="text" class="form-control" name="inputSalary" id="inputSalary"  autocomplete="off" placeholder="Заработная плата">
                 </div>
                 <div class="form-group">
                     <label for="inputDateStart">Дата начала</label>
-                    <input type="text" class="form-control" id="inputDateStart" placeholder="Дата начала">
+                    <input type="text" class="form-control" name="inputDateStart" id="inputDateStart"  autocomplete="off" placeholder="Дата начала">
                 </div>
                 <div class="form-group">
                     <label for="inputDateStop">Дата окончания</label>
-                    <input type="text" class="form-control" id="inputDateStop" placeholder="Дата окончания">
+                    <input type="text" class="form-control" name="inputDateStop" id="inputDateStop"  autocomplete="off" placeholder="Дата окончания">
                 </div>
                 <div class="form-group">
                     <label for="inputOtherInfo">Дополнительная информация</label>
-                    <input type="text" class="form-control" id="inputOtherInfo" placeholder="Дополнительная информация">
+                    <input type="text" class="form-control" name="inputOtherInfo" id="inputOtherInfo"  autocomplete="off" placeholder="Дополнительная информация">
                 </div>
                 <div class="form-group">
                     <label for="checkIsSpeciality">По специальности</label>
-                    <input type="checkbox" class="form-control" id="checkIsSpeciality" >
+                    <input type="checkbox" class="form-control" name="checkIsSpeciality" id="checkIsSpeciality" >
                     <p class="help-block">Поставьте галочку если вы работали по специальности.</p>
                 </div>
                 <div class="form-group">
                     <label for="checkWithSpravka">Справка</label>
-                    <input type="checkbox" class="form-control" id="checkWithSpravka">
+                    <input type="checkbox" class="form-control" name="checkWithSpravka" id="checkWithSpravka">
                     <input type="file" id="spravkaFile">
                     <p class="help-block">При наличии прикрепите справку-подтверждение.</p>
                 </div>
                 <div class="form-group">
                     <label for="checkIsPraktik">Практика</label>
-                    <input type="checkbox" class="form-control" id="checkIsPraktik" >
+                    <input type="checkbox" class="form-control" name="checkIsPraktik" id="checkIsPraktik" >
                     <p class="help-block">Поставьте галочку если это была практика.</p>
                 </div>
                 <div class="form-group">
                     <label for="inputDateAdd">Дата добавления</label>
-                    <input type="text" class="form-control" id="inputDateAdd" placeholder="Дата добавления">
+                    <input type="text" class="form-control" id="inputDateAdd" name="inputDateAdd"  autocomplete="off" placeholder="Дата добавления">
                     <p class="help-block">Обязательное поле.</p>
                 </div>
             </form>
@@ -68,6 +68,7 @@
         <div class="modal-footer">
             <div class="pull-left">
             </div>
+            <button type="button" class="btn btn-default" id="buttSubmit">Сохранить</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
         </div>
     </div>

@@ -21,7 +21,30 @@ namespace LkUgtu.Models
                 post = v.Dolznost.NameDolznost
             };
         }
-
+        public static PostDTO PostDTO(Dolznost p)
+        {
+            return new PostDTO()
+            {
+                id = p.IDDolznost,
+                name = p.NameDolznost
+            };
+        }
+        public static PredpriyatieDTO PredpriyatieDTO(Predpriyatie p)
+        {
+            return new PredpriyatieDTO()
+            {
+                    id = p.IDPredpriyatie,
+                    name = p.Name
+            };
+        }
+        public static DepartmentDTO DepartmentDTO (Trudoustr tr)
+        {
+            return new DepartmentDTO()
+            {
+                id = 0,
+                name = tr.Otdel
+            };
+        }
         public static TrudoustrDTO TrudoustrDTO(Trudoustr t)
         {
             return new TrudoustrDTO()

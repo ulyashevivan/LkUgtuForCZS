@@ -56,6 +56,17 @@ namespace LkUgtu.Controllers
         /// <returns></returns>
         public ActionResult GetModalViewTrudoustrEdit()
         {
+            ViewBag.action = "Правка";
+            return PartialView("ModalViewTrudoustrEdit");
+        }
+
+        /// <summary>
+        /// Получение модального окна  для добавления трудоустройства
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetModalAddTrudoustr()
+        {
+            ViewBag.action = "Добавление";
             return PartialView("ModalViewTrudoustrEdit");
         }
         public JsonResult GetAllVakans(string search)
@@ -70,6 +81,12 @@ namespace LkUgtu.Controllers
         {
             var idStud = 29124;
             return Json(new TrudoustrListDTO(idStud).trudoustrs.Where(t=>t.idTrud == idTrud), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SendTrud()
+        {
+            var r = Request;
+            var c = Response;
+            return Json(r, JsonRequestBehavior.AllowGet);
         }
         //public ActionResult GetVakansModalViewVakansList()
         //{

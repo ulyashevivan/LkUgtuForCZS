@@ -15,12 +15,16 @@ namespace LkUgtu.App_Start
                          ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.min.js"));
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/bootstrap-datepicker.min.js",
+                      "~/Scripts/locales/bootstrap-datepicker.ru.min.js",
+                      "~/Scripts/bootstrap3-typeahead.min.js"));
  
             bundles.Add(new StyleBundle("~/Content/css").Include(
                  "~/Content/bootstrap.min.css", 
                  "~/Content/bootstrap-theme.min.css",
                  "~/Content/ui-bootstrap-csp.css",
+                 "~/Content/bootstrap-datepicker.min.css",
                       "~/Content/site.css"));
         }
     }

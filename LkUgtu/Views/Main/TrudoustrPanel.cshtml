@@ -8,7 +8,7 @@
     <div class="panel-body" style="padding: 0;">
         <div class="centered" style="background-color: #f5f5f5">
             <ul class="nav nav-justified">
-                <li>
+                <li id="buttAddTrudoustr">
                     <a style="padding: 5px" title="Добавить трудоустройсво" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-plus"></span></a>
                 </li>
                 <li id="buttViewTrudoustrList">
@@ -27,6 +27,29 @@
 </div>
 
 <script>
+
+
+    $('#buttAddTrudoustr').click(function () {
+        var url = "@Url.Action("GetModalAddTrudoustr")";
+        $.get(url, function (data) {
+            $('#myModal').html(data);
+            $('#myModal').appendTo('body').modal('show');
+            $('#inputDateAdd').val(new Date().toLocaleDateString());
+            $('#inputDateStart').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+            $('#inputDateStop').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+            $('#inputDateAdd').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+            $.get('/Base/AutocompletePred', function (data) {
+                $('#inputPredpr').typeahead({ source: data });
+            });
+            $.get('/Base/AutocompletePost', function (data) {
+                $('#inputPost').typeahead({ source: data });
+            });
+            $.get('/Base/AutocompleteDepartment', function (data) {
+                $('#inputDepartment').typeahead({ source: data });
+            });
+
+        });
+    });
 
     $('#buttViewTrudoustrList').click(function () {
         var url = "@Url.Action("GetModalViewTrudoustrList")";
@@ -137,8 +160,41 @@
                 $('#checkWithSpravka').val(t.withSpravka);
                 $('#checkIsPraktik').val(t.isPractik);
                 $('#inputDateAdd').val(new Date(parseInt(t.dateCall.substr(6))).toLocaleDateString());
+                $('#inputDateStart').datepicker({format:'dd.mm.yyyy', language:'ru'});
+                $('#inputDateStop').datepicker({format: 'dd.mm.yyyy', language: 'ru' });
+                $('#inputDateAdd').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+                $.get('/Base/AutocompletePred', function (data) {
+                    $('#inputPredpr').typeahead({ source: data });
+                });
+                $.get('/Base/AutocompletePost', function (data) {
+                    $('#inputPost').typeahead({source:data});
+                });
+                $.get('/Base/AutocompleteDepartment', function (data) {
+                    $('#inputDepartment').typeahead({ source: data });
+                });
             }
         });
+
+    });
+    $(document).on('click', '#buttSubmit', function () {
+        $.post('@Url.Action("SendTrud")', $('#contTrud').serialize(), function (data) {
+            alert('a');
+        }, 'json');
+
+      @*  $('#contTrud').attr
+        $('#contTrud').submit(function (event) {
+
+        });
+        var formdata = new FormData($('#contTrud'));
+        $.ajax({
+            url: '@Url.Action("SendTrud")',
+            data: formdata,
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+
+            }
+        });*@
 
     });
 </script>
