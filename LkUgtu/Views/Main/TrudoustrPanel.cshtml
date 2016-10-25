@@ -177,7 +177,8 @@
 
     });
     $(document).on('click', '#buttSubmit', function () {
-        $.post('@Url.Action("SendTrud")', $('#contTrud').serialize(), function (data) {
+        $.post('@Url.Action("SendTrud")', $('#contTrud').serialize(),
+        function (data) {
             alert('a');
         }, 'json');
 

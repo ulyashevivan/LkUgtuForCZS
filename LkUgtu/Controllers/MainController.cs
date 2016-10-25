@@ -82,10 +82,21 @@ namespace LkUgtu.Controllers
             var idStud = 29124;
             return Json(new TrudoustrListDTO(idStud).trudoustrs.Where(t=>t.idTrud == idTrud), JsonRequestBehavior.AllowGet);
         }
-        public JsonResult SendTrud()
+        public JsonResult SendTrud(string inputPredpr
+                                  , string inputPost
+                                  , string inputDepartment
+                                  , string inputSalary
+                                  , string inputDateStart
+                                  , string inputDateStop
+                                  , string inputOtherInfo
+                                  , string checkIsSpeciality
+                                  , string checkWithSpravka
+                                  , HttpPostedFileBase spravkaFile
+                                  , string checkIsPraktik
+                                  , string inputDateAdd)
         {
-            var r = Request;
-            var c = Response;
+            var r = Request.Params["inputPredpr"];
+            var file = Request.Files["spravkaFile"];
             return Json(r, JsonRequestBehavior.AllowGet);
         }
         //public ActionResult GetVakansModalViewVakansList()
