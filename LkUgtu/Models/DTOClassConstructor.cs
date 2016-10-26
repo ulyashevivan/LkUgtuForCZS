@@ -29,6 +29,25 @@ namespace LkUgtu.Models
                 name = p.NameDolznost
             };
         }
+
+        public static ReasonForCloseDTO ReasonForCloseDTO(ZnachParam s)
+        {
+            return new ReasonForCloseDTO()
+            {
+                id = s.idZnachParam,
+                name = s.ZnachParamName
+            };
+        }
+
+        public static EmploymentDTO EmploymentDTO(ZnachParam s)
+        {
+            return new EmploymentDTO()
+            {
+                id = s.idZnachParam,
+                name = s.ZnachParamName
+            };
+        }
+
         public static PredpriyatieDTO PredpriyatieDTO(Predpriyatie p)
         {
             return new PredpriyatieDTO()

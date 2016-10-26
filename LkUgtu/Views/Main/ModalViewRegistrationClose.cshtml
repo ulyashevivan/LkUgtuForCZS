@@ -1,0 +1,35 @@
+﻿<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"> Закрытие регистрации </h4>
+        </div>
+        <div class="modal-body" id="contTrudoustrEdit">
+
+            <form id="contTrud" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="inputReasonClose">Причина закрытия</label>
+                    @Html.DropDownList("inputReasonClose", (IEnumerable<SelectListItem>)ViewBag.reasonsforclose, new { @class = "form-control" })
+                    <p class="help-block">Обязательное поле.</p>
+                </div>
+                <div class="form-group">
+                    <label for="inputDateClose">Дата закрытия</label>
+                    <input type="text" class="form-control" id="inputDateClose" name="inputDateClose" autocomplete="off" placeholder="Дата закрытия">
+                    <p class="help-block">Обязательное поле.</p>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <div class="pull-left">
+            </div>
+            <button type="button" class="btn btn-default" id="buttSubmit">Сохранить</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

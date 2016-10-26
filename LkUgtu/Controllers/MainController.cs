@@ -82,6 +82,30 @@ namespace LkUgtu.Controllers
             var idStud = 29124;
             return Json(new TrudoustrListDTO(idStud).trudoustrs.Where(t=>t.idTrud == idTrud), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetModalAddRegistration()
+        {
+            ViewBag.action = "Добавление";
+            var employments = new EmploymentDTOList().employments;
+            ViewBag.employments = new SelectList(employments, typeof(EmploymentDTO).GetProperties()[0].Name, typeof(EmploymentDTO).GetProperties()[1].Name).ToList();
+            return PartialView("ModalViewRegistrationEdit");
+        }
+        public ActionResult GetModalEditRegistration()
+        {
+            ViewBag.action = "Редактирование";
+            var employments = new EmploymentDTOList().employments;
+            ViewBag.employments = new SelectList(employments, typeof(EmploymentDTO).GetProperties()[0].Name, typeof(EmploymentDTO).GetProperties()[1].Name).ToList();
+            return PartialView("ModalViewRegistrationEdit");
+        }
+        public ActionResult GetModalHistoryRegistration()
+        {
+            return PartialView("ModalViewRegistrationHistory");
+        }
+        public ActionResult GetModalCloseRegistration()
+        {
+            var reasonsforclose = new ReasonsForCloseDTOList().reasonsforclose;
+            ViewBag.reasonsforclose = new SelectList(reasonsforclose, typeof(ReasonForCloseDTO).GetProperties()[0].Name, typeof(ReasonForCloseDTO).GetProperties()[1].Name).ToList();
+            return PartialView("ModalViewRegistrationClose");
+        }
         public JsonResult SendTrud(string inputPredpr
                                   , string inputPost
                                   , string inputDepartment

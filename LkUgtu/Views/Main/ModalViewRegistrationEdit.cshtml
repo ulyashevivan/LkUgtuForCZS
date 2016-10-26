@@ -1,0 +1,56 @@
+﻿<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">@ViewBag.action обращения </h4>
+        </div>
+        <div class="modal-body" id="contTrudoustrEdit">
+
+            <form id="contTrud" enctype="multipart/form-data">
+               <!-- <div class="form-group">
+                    <label for="inputTelefon">Телефон</label>
+                    <input type="text" class="form-control" name="inputTelefon" id="inputTelefon" autocomplete="off" placeholder="Телефон">
+                </div>
+                <div class="form-group">
+                    <label for="inputMail">E-mail</label>
+                    <input type="text" class="form-control" name="inputMail" id="inputMail" autocomplete="off" placeholder="E-mail">
+                </div>-->
+           
+                <div class="form-group">
+                    <label for="inputEmployment">Тип занятости</label>
+                    @Html.DropDownList("inputEmployment", (IEnumerable<SelectListItem>) ViewBag.employments , new { @class = "form-control" })
+                    <p class="help-block">Обязательное поле.</p>
+                </div>
+                <div class="form-group">
+                    <label for="inputOtherInfo">Дополнительная информация</label>
+                    <textarea class="form-control" name="inputOtherInfo" id="inputOtherInfo" rows="3" autocomplete="off" placeholder="Дополнительная информация"></textarea>
+                </div>
+               <!-- <div class="form-group">
+                    <label for="inputMarks">Отметки</label>
+                    <input type="text" class="form-control" name="inputMarks" id="inputMarks" autocomplete="off" placeholder="Отметки">
+                </div>-->
+                <div class="form-group">
+                    <label for="cvFile">Загрузить файл резюме</label>
+                    <input type="file" class="form-control" name="cvFile" id="cvFile">
+                    <p class="help-block">При наличии прикрепите резюме.</p>
+                </div>
+                <div class="form-group">
+                    <label for="inputDateAdd">Дата добавления</label>
+                    <input type="text" class="form-control" id="inputDateAdd" name="inputDateAdd" autocomplete="off" placeholder="Дата добавления">
+                    <p class="help-block">Обязательное поле.</p>
+                </div>
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <div class="pull-left">
+            </div>
+            <button type="button" class="btn btn-default" id="buttSubmit">Сохранить</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+    </div>
+</div>
+
+
+
+
