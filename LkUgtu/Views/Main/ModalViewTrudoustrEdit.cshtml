@@ -8,7 +8,7 @@
 
             <form id="contTrud" enctype="multipart/form-data">
                   <!---->
-                  
+                <input type="hidden" id="idTrud" name="idTrud"> 
                 <div class="form-group">
                     <label for="inputPredpr">Предприятие</label>
                     <input type="text" class="form-control" name="inputPredpr" id="inputPredpr" autocomplete="off" placeholder="Предприятие">
@@ -47,8 +47,8 @@
                 <div class="form-group">
                     <label for="checkWithSpravka">Справка</label>
                     <input type="checkbox" class="form-control" name="checkWithSpravka" id="checkWithSpravka">
-                    <input type="file" name="spravkaFile" id="spravkaFile">
-                    <p class="help-block">При наличии прикрепите справку-подтверждение.</p>
+                    <!--<input type="file" name="spravkaFile" id="spravkaFile">
+                    <p class="help-block">При наличии прикрепите справку-подтверждение.</p>-->
                 </div>
                 <div class="form-group">
                     <label for="checkIsPraktik">Практика</label>

@@ -71,7 +71,7 @@ namespace LkUgtu.Controllers
         }
         public JsonResult GetAllVakans(string search)
         {
-            return Json((search==null)?new VakansListDTO().vakans:new VakansListDTO().vakans.Where(p=>p.post.ToLower().Contains(search)), JsonRequestBehavior.AllowGet);
+            return Json((search==null)?new VakansListDTO().vakans.ToList():new VakansListDTO().vakans.Where(p=>p.post.ToLower().Contains(search)).ToList(), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetAllTrudoustr(int idStud)
         { 
@@ -80,7 +80,7 @@ namespace LkUgtu.Controllers
         public JsonResult GetTrudoustr(int idTrud)
         {
             var idStud = 29124;
-            return Json(new TrudoustrListDTO(idStud).trudoustrs.Where(t=>t.idTrud == idTrud), JsonRequestBehavior.AllowGet);
+            return Json(new TrudoustrListDTO(idStud).trudoustrs.Where(t=>t.idTrud == idTrud).ToList(), JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetModalAddRegistration()
         {
@@ -106,21 +106,36 @@ namespace LkUgtu.Controllers
             ViewBag.reasonsforclose = new SelectList(reasonsforclose, typeof(ReasonForCloseDTO).GetProperties()[0].Name, typeof(ReasonForCloseDTO).GetProperties()[1].Name).ToList();
             return PartialView("ModalViewRegistrationClose");
         }
-        public JsonResult SendTrud(string inputPredpr
+        public JsonResult SendTrud(int? idTrud
+                                  , string inputPredpr
                                   , string inputPost
                                   , string inputDepartment
-                                  , string inputSalary
+                                  , int? inputSalary
                                   , string inputDateStart
                                   , string inputDateStop
                                   , string inputOtherInfo
                                   , string checkIsSpeciality
                                   , string checkWithSpravka
-                                  , HttpPostedFileBase spravkaFile
+                                  //, HttpPostedFileBase spravkaFile
                                   , string checkIsPraktik
                                   , string inputDateAdd)
         {
             var r = Request.Params["inputPredpr"];
             var file = Request.Files["spravkaFile"];
+            int idStud = 29124;
+            CRUDController.SaveTrud(idStud
+                                  , idTrud
+                                  , inputPredpr
+                                  , inputPost
+                                  , inputDepartment
+                                  , inputSalary
+                                  , inputDateStart
+                                  , inputDateStop
+                                  , inputOtherInfo
+                                  , checkIsSpeciality
+                                  , checkWithSpravka
+                                  , checkIsPraktik
+                                  , inputDateAdd);
             return Json(r, JsonRequestBehavior.AllowGet);
         }
         //public ActionResult GetVakansModalViewVakansList()

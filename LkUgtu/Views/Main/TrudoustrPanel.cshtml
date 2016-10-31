@@ -138,17 +138,17 @@
         var idt = $(this).attr('data');
         var url = "@Url.Action("GetModalViewTrudoustrEdit")";
         $.get(url, function (data) {
-            $('#myModalEdit').html(data);
-            $('#myModalEdit').appendTo('body').modal('show');
-        });
-
+          
         $.ajax({
             url: '@Url.Action("GetTrudoustr")',
             data: { idTrud: idt },
             contentType: "application/json",
             dataType: "json",
             success: function (tr) {
+                $('#myModalEdit').html(data);
+                $('#myModalEdit').appendTo('body').modal('show');
                 var t = tr[0];
+                $('#idTrud').val(t.idTrud);
                 $('#inputPredpr').val(t.company.name);
                 $('#inputPost').val(t.post.name);
                 $('#inputDepartment').val(t.department);
@@ -156,9 +156,9 @@
                 $('#inputDateStart').val(new Date(parseInt(t.dateStart.substr(6))).toLocaleDateString());
                 $('#inputDateStop').val(new Date(parseInt(t.dateStop.substr(6))).toLocaleDateString());
                 $('#inputOtherInfo').val(t.otherInfo);
-                $('#checkIsSpeciality').val(t.isWorkSpecialty);
-                $('#checkWithSpravka').val(t.withSpravka);
-                $('#checkIsPraktik').val(t.isPractik);
+                $('#checkIsSpeciality').attr('checked',t.isWorkSpecialty);
+                $('#checkWithSpravka').attr('checked', t.withSpravka);
+                $('#checkIsPraktik').attr('checked', t.isPractik);
                 $('#inputDateAdd').val(new Date(parseInt(t.dateCall.substr(6))).toLocaleDateString());
                 $('#inputDateStart').datepicker({format:'dd.mm.yyyy', language:'ru'});
                 $('#inputDateStop').datepicker({format: 'dd.mm.yyyy', language: 'ru' });
@@ -174,12 +174,15 @@
                 });
             }
         });
+    });
 
     });
     $(document).on('click', '#buttSubmit', function () {
         $.post('@Url.Action("SendTrud")', $('#contTrud').serialize(),
         function (data) {
-            alert('a');
+            alert('save');
+            $('#myModalEdit').appendTo('body').modal('hide');
+            $('#myModal').appendTo('body').modal('hide');
         }, 'json');
 
       @*  $('#contTrud').attr
