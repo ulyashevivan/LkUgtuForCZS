@@ -61,6 +61,15 @@
         $.get(url, function (data) {
             $('#myModal').html(data);
             $('#myModal').appendTo('body').modal('show');
+            $.ajax({
+                url: '@Url.Action("...")',
+                data: { idStud: '29124' },
+                contentType: "application/json",
+                dataType: "json",
+                success: function (reg) {
+
+                }
+            });
         });
     });
     $('#buttCloseRegistration').click(function () {

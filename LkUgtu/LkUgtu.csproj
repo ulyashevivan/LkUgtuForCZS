@@ -289,6 +289,7 @@
     <Compile Include="Models\IndexDTO.cs" />
     <Compile Include="Models\PredpriyatieDTO.cs" />
     <Compile Include="Models\ReasonForCloseCvDTO.cs" />
+    <Compile Include="Models\RegistrationDTO.cs" />
     <Compile Include="Models\TrudoustrDTO.cs" />
     <Compile Include="Models\VakansDTO.cs" />
     <Compile Include="oAuthLkUgtuProvider.cs" />

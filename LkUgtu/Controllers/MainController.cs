@@ -116,7 +116,6 @@ namespace LkUgtu.Controllers
                                   , string inputOtherInfo
                                   , string checkIsSpeciality
                                   , string checkWithSpravka
-                                  //, HttpPostedFileBase spravkaFile
                                   , string checkIsPraktik
                                   , string inputDateAdd)
         {
@@ -138,25 +137,11 @@ namespace LkUgtu.Controllers
                                   , inputDateAdd);
             return Json(r, JsonRequestBehavior.AllowGet);
         }
-        //public ActionResult GetVakansModalViewVakansList()
-        //{
-        //    var model = new VakansListDTO().vakans;
-        //    return PartialView("ModalViewVakansList", model);
-        //}
 
-        //public ActionResult VakansPanel(AllInfo info)
-        //{
-        //    return PartialView();
-        //}
-        //public ActionResult RegistrationPanel(AllInfo info)
-        //{
-        //    return PartialView();
-        //}
-        //public ActionResult TrudoustrPanel(AllInfo info)
-        //{
-        //    return PartialView();
-        //}
+        public JsonResult GetAllRegistrations(int idStud)
+        {
 
-
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
     }
 }

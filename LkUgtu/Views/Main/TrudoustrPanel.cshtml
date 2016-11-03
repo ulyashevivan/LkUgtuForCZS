@@ -26,14 +26,15 @@
     </div>
 </div>
 
+<div id="myModalEdit" class="modal fade"></div>
+
 <script>
 
 
     $('#buttAddTrudoustr').click(function () {
         var url = "@Url.Action("GetModalAddTrudoustr")";
         $.get(url, function (data) {
-            $('#myModal').html(data);
-            $('#myModal').appendTo('body').modal('show');
+            $('#myModalEdit').html(data);
             $('#inputDateAdd').val(new Date().toLocaleDateString());
             $('#inputDateStart').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
             $('#inputDateStop').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
@@ -47,7 +48,7 @@
             $.get('/Base/AutocompleteDepartment', function (data) {
                 $('#inputDepartment').typeahead({ source: data });
             });
-
+            $('#myModalEdit').appendTo('body').modal('show');
         });
     });
 
