@@ -60,14 +60,54 @@
         var url = "@Url.Action("GetModalHistoryRegistration")";
         $.get(url, function (data) {
             $('#myModal').html(data);
-            $('#myModal').appendTo('body').modal('show');
+            
             $.ajax({
-                url: '@Url.Action("...")',
-                data: { idStud: '29124' },
+                url: '@Url.Action("GetAllRegs")',
+                //data: { idStud: '29124' },
                 contentType: "application/json",
                 dataType: "json",
-                success: function (reg) {
-
+                success: function (registrations) {
+                    for (var i = 0; i < registrations.length; i++) {
+                        $('#tableRegList').append(
+                            $(document.createElement('tr'))
+                            .append(
+                                $(document.createElement('td'))
+                                    .append(
+                                        $(document.createElement('span'))
+                                        .html(i)))
+                            .append(
+                                $(document.createElement('td'))
+                                    .append(
+                                        $(document.createElement('span'))
+                                        .html(registrations[i].employment.name)))
+                            .append(
+                                $(document.createElement('td'))
+                                    .append(
+                                        $(document.createElement('span'))
+                                        .html(registrations[i].otherInfo)))
+                            .append(
+                                $(document.createElement('td'))
+                                    .append(
+                                        $(document.createElement('span'))
+                                        .html('file')))
+                            .append(
+                                $(document.createElement('td'))
+                                    .append(
+                                        $(document.createElement('span'))
+                                        .html((registrations[i].dateUnRegistration==null) ? '' : new Date(parseInt(registrations[i].dateUnRegistration.substr(6))).toLocaleDateString())))
+                            .append(
+                                $(document.createElement('td'))
+                                    .append(
+                                        $(document.createElement('span'))
+                                        .html((registrations[i].dateRegistration==null) ? '' : new Date(parseInt(registrations[i].dateRegistration.substr(6))).toLocaleDateString())))
+                            .append(
+                                $(document.createElement('td'))
+                                    .append(
+                                        $(document.createElement('span'))
+                                        .html(registrations[i].reasonClose.name)))
+                                        );
+                    }
+                    $('#myModal').appendTo('body').modal('show');
                 }
             });
         });
