@@ -18,6 +18,7 @@ namespace LkUgtu.orm
         public ZnachParam()
         {
             this.Param_Vakans = new HashSet<Param_Vakans>();
+            this.Param_Resume = new HashSet<Param_Resume>();
         }
     
         public int idZnachParam { get; set; }
@@ -27,5 +28,7 @@ namespace LkUgtu.orm
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Param_Vakans> Param_Vakans { get; set; }
         public virtual Parametr Parametr { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Param_Resume> Param_Resume { get; set; }
     }
 }

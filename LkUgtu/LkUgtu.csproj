@@ -299,6 +299,9 @@
     <Compile Include="orm\Parametr.cs">
       <DependentUpon>ugtuDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="orm\Param_Resume.cs">
+      <DependentUpon>ugtuDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="orm\Param_Vakans.cs">
       <DependentUpon>ugtuDB.tt</DependentUpon>
     </Compile>
@@ -309,6 +312,9 @@
       <DependentUpon>ugtuDB.tt</DependentUpon>
     </Compile>
     <Compile Include="orm\Resume.cs">
+      <DependentUpon>ugtuDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="orm\Status.cs">
       <DependentUpon>ugtuDB.tt</DependentUpon>
     </Compile>
     <Compile Include="orm\Trudoustr.cs">

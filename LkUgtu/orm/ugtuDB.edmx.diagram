@@ -28,6 +28,13 @@
         <AssociationConnector Association="UGTUModel.Param_VakansVakansForeign" />
         <AssociationConnector Association="UGTUModel.Param_VakansZnachParamForeign" />
         <AssociationConnector Association="UGTUModel.ZnachParamParametrForeign" />
+        <EntityTypeShape EntityType="UGTUModel.Param_Resume" Width="1.5" PointX="13.125" PointY="5.25" />
+        <AssociationConnector Association="UGTUModel.Param_ResumeParametrForeign" />
+        <AssociationConnector Association="UGTUModel.Param_ResumeResumeForeign" />
+        <AssociationConnector Association="UGTUModel.Param_ResumeZnachParamForeign" />
+        <EntityTypeShape EntityType="UGTUModel.Status" Width="1.5" PointX="3.375" PointY="5.875" />
+        <AssociationConnector Association="UGTUModel.ResumeStatusForeign" />
+        <AssociationConnector Association="UGTUModel.VakansStatusForeign" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

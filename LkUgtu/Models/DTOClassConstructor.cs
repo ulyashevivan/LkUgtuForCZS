@@ -48,6 +48,15 @@ namespace LkUgtu.Models
             };
         }
 
+        public static stateRegistrarionDTO stateRegistrarionDTO(Status status)
+        {
+            return new stateRegistrarionDTO()
+            {
+                id = status.idStatus,
+                name = status.StatusName
+            };
+        }
+
         public static PredpriyatieDTO PredpriyatieDTO(Predpriyatie p)
         {
             return new PredpriyatieDTO()

@@ -48,5 +48,6 @@ namespace LkUgtu.orm
         public virtual Dolznost Dolznost { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Param_Vakans> Param_Vakans { get; set; }
+        public virtual Status Status { get; set; }
     }
 }

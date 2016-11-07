@@ -10,6 +10,22 @@ namespace LkUgtu.Models
     {
         public int id { get; set; }
         public string name { get; set; }
+        public readonly int idParam = 3; // reason close cv
+        public ReasonForCloseDTO()
+        {
+        }
+        public ReasonForCloseDTO(ICollection<Param_Resume> paramRes)
+        {
+            using(var db = new UGTUEntities())
+            {
+                var reason = paramRes.Where(p => p.idParam == idParam).SingleOrDefault();
+                if (reason != null)
+                {
+                    id = (int)reason?.idResumeZnachParam;
+                    name = db.ZnachParam.SingleOrDefault(d => d.idZnachParam == id)?.ZnachParamName;
+                }
+            }
+        }
     }
     
     public class ReasonsForCloseDTOList

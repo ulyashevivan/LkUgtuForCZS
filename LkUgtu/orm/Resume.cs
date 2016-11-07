@@ -18,6 +18,7 @@ namespace LkUgtu.orm
         public Resume()
         {
             this.Trudoustr = new HashSet<Trudoustr>();
+            this.Param_Resume = new HashSet<Param_Resume>();
         }
     
         public int idResume { get; set; }
@@ -34,5 +35,8 @@ namespace LkUgtu.orm
         public virtual Vakans Vakans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Trudoustr> Trudoustr { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Param_Resume> Param_Resume { get; set; }
+        public virtual Status Status { get; set; }
     }
 }

@@ -34,5 +34,7 @@ namespace LkUgtu.orm
         public virtual DbSet<Param_Vakans> Param_Vakans { get; set; }
         public virtual DbSet<Parametr> Parametr { get; set; }
         public virtual DbSet<ZnachParam> ZnachParam { get; set; }
+        public virtual DbSet<Param_Resume> Param_Resume { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
     }
 }

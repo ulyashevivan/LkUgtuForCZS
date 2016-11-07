@@ -82,6 +82,11 @@ namespace LkUgtu.Controllers
             var idStud = 29124;
             return Json(new TrudoustrListDTO(idStud).trudoustrs.Where(t=>t.idTrud == idTrud).ToList(), JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetAllRegs()
+        {
+            var idStud = 29124;
+            return Json(new RegistrationDTOList(idStud).registrations.ToList(), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetModalAddRegistration()
         {
             ViewBag.action = "Добавление";

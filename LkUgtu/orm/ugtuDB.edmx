@@ -43,6 +43,18 @@
           <Property Name="IDDolznost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameDolznost" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
+        <EntityType Name="Param_Resume">
+          <Key>
+            <PropertyRef Name="idParam_Resume" />
+          </Key>
+          <Property Name="idParam_Resume" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idParam" Type="int" Nullable="false" />
+          <Property Name="idResume" Type="int" Nullable="false" />
+          <Property Name="idResumeZnachParam" Type="int" />
+          <Property Name="Chislo" Type="int" />
+          <Property Name="Stroka" Type="varchar" MaxLength="500" />
+          <Property Name="Data" Type="date" />
+        </EntityType>
         <EntityType Name="Param_Vakans">
           <Key>
             <PropertyRef Name="idParam_Vakans" />
@@ -106,6 +118,13 @@
           <Property Name="DataZakritiya" Type="date" />
           <Property Name="idFile" Type="int" />
         </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="idStatus" />
+          </Key>
+          <Property Name="idStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Trudoustr">
           <Key>
             <PropertyRef Name="IDTrudoustr" />
@@ -158,6 +177,42 @@
           <Property Name="ZnachParamName" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="idParam" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="Param_ResumeParametrForeign">
+          <End Role="Parametr" Type="Self.Parametr" Multiplicity="1" />
+          <End Role="Param_Resume" Type="Self.Param_Resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametr">
+              <PropertyRef Name="idParam" />
+            </Principal>
+            <Dependent Role="Param_Resume">
+              <PropertyRef Name="idParam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Param_ResumeResumeForeign">
+          <End Role="Resume" Type="Self.Resume" Multiplicity="1" />
+          <End Role="Param_Resume" Type="Self.Param_Resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resume">
+              <PropertyRef Name="idResume" />
+            </Principal>
+            <Dependent Role="Param_Resume">
+              <PropertyRef Name="idResume" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Param_ResumeZnachParamForeign">
+          <End Role="ZnachParam" Type="Self.ZnachParam" Multiplicity="0..1" />
+          <End Role="Param_Resume" Type="Self.Param_Resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZnachParam">
+              <PropertyRef Name="idZnachParam" />
+            </Principal>
+            <Dependent Role="Param_Resume">
+              <PropertyRef Name="idResumeZnachParam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Param_VakansParametrForeign">
           <End Role="Parametr" Type="Self.Parametr" Multiplicity="1" />
           <End Role="Param_Vakans" Type="Self.Param_Vakans" Multiplicity="*" />
@@ -227,6 +282,18 @@
             </Principal>
             <Dependent Role="Predpriyatie">
               <PropertyRef Name="IDDolznostRuk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ResumeStatusForeign">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Resume" Type="Self.Resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="Resume">
+              <PropertyRef Name="idStatus" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -314,6 +381,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="VakansStatusForeign">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Vakans" Type="Self.Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="Vakans">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ZnachParamParametrForeign">
           <End Role="Parametr" Type="Self.Parametr" Multiplicity="1" />
           <End Role="ZnachParam" Type="Self.ZnachParam" Multiplicity="*" />
@@ -329,13 +408,27 @@
         <EntityContainer Name="Хранилище UGTUModelContainer">
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dolznost" EntityType="Self.Dolznost" Schema="ShemaCZS" store:Type="Tables" />
+          <EntitySet Name="Param_Resume" EntityType="Self.Param_Resume" Schema="ShemaCZS" store:Type="Tables" />
           <EntitySet Name="Param_Vakans" EntityType="Self.Param_Vakans" Schema="ShemaCZS" store:Type="Tables" />
           <EntitySet Name="Parametr" EntityType="Self.Parametr" Schema="ShemaCZS" store:Type="Tables" />
           <EntitySet Name="Predpriyatie" EntityType="Self.Predpriyatie" Schema="ShemaCZS" store:Type="Tables" />
           <EntitySet Name="Resume" EntityType="Self.Resume" Schema="ShemaCZS" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="ShemaCZS" store:Type="Tables" />
           <EntitySet Name="Trudoustr" EntityType="Self.Trudoustr" Schema="ShemaCZS" store:Type="Tables" />
           <EntitySet Name="Vakans" EntityType="Self.Vakans" Schema="ShemaCZS" store:Type="Tables" />
           <EntitySet Name="ZnachParam" EntityType="Self.ZnachParam" Schema="ShemaCZS" store:Type="Tables" />
+          <AssociationSet Name="Param_ResumeParametrForeign" Association="Self.Param_ResumeParametrForeign">
+            <End Role="Parametr" EntitySet="Parametr" />
+            <End Role="Param_Resume" EntitySet="Param_Resume" />
+          </AssociationSet>
+          <AssociationSet Name="Param_ResumeResumeForeign" Association="Self.Param_ResumeResumeForeign">
+            <End Role="Resume" EntitySet="Resume" />
+            <End Role="Param_Resume" EntitySet="Param_Resume" />
+          </AssociationSet>
+          <AssociationSet Name="Param_ResumeZnachParamForeign" Association="Self.Param_ResumeZnachParamForeign">
+            <End Role="ZnachParam" EntitySet="ZnachParam" />
+            <End Role="Param_Resume" EntitySet="Param_Resume" />
+          </AssociationSet>
           <AssociationSet Name="Param_VakansParametrForeign" Association="Self.Param_VakansParametrForeign">
             <End Role="Parametr" EntitySet="Parametr" />
             <End Role="Param_Vakans" EntitySet="Param_Vakans" />
@@ -359,6 +452,10 @@
           <AssociationSet Name="PredprDolznostRukForeign" Association="Self.PredprDolznostRukForeign">
             <End Role="Dolznost" EntitySet="Dolznost" />
             <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+          </AssociationSet>
+          <AssociationSet Name="ResumeStatusForeign" Association="Self.ResumeStatusForeign">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Resume" EntitySet="Resume" />
           </AssociationSet>
           <AssociationSet Name="ResumeVakansForeign" Association="Self.ResumeVakansForeign">
             <End Role="Vakans" EntitySet="Vakans" />
@@ -386,6 +483,10 @@
           </AssociationSet>
           <AssociationSet Name="VakansPredprForeign" Association="Self.VakansPredprForeign">
             <End Role="Predpriyatie" EntitySet="Predpriyatie" />
+            <End Role="Vakans" EntitySet="Vakans" />
+          </AssociationSet>
+          <AssociationSet Name="VakansStatusForeign" Association="Self.VakansStatusForeign">
+            <End Role="Status" EntitySet="Status" />
             <End Role="Vakans" EntitySet="Vakans" />
           </AssociationSet>
           <AssociationSet Name="ZnachParamParametrForeign" Association="Self.ZnachParamParametrForeign">
@@ -494,6 +595,28 @@
             <End Role="Parametr" EntitySet="Parametr" />
             <End Role="ZnachParam" EntitySet="ZnachParam" />
           </AssociationSet>
+          <EntitySet Name="Param_Resume" EntityType="UGTUModel.Param_Resume" />
+          <AssociationSet Name="Param_ResumeParametrForeign" Association="UGTUModel.Param_ResumeParametrForeign">
+            <End Role="Parametr" EntitySet="Parametr" />
+            <End Role="Param_Resume" EntitySet="Param_Resume" />
+          </AssociationSet>
+          <AssociationSet Name="Param_ResumeResumeForeign" Association="UGTUModel.Param_ResumeResumeForeign">
+            <End Role="Resume" EntitySet="Resume" />
+            <End Role="Param_Resume" EntitySet="Param_Resume" />
+          </AssociationSet>
+          <AssociationSet Name="Param_ResumeZnachParamForeign" Association="UGTUModel.Param_ResumeZnachParamForeign">
+            <End Role="ZnachParam" EntitySet="ZnachParam" />
+            <End Role="Param_Resume" EntitySet="Param_Resume" />
+          </AssociationSet>
+          <EntitySet Name="Status" EntityType="UGTUModel.Status" />
+          <AssociationSet Name="ResumeStatusForeign" Association="UGTUModel.ResumeStatusForeign">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Resume" EntitySet="Resume" />
+          </AssociationSet>
+          <AssociationSet Name="VakansStatusForeign" Association="UGTUModel.VakansStatusForeign">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Vakans" EntitySet="Vakans" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Vakans">
           <Key>
@@ -521,6 +644,7 @@
           <NavigationProperty Name="Trudoustr" Relationship="UGTUModel.TrudoustrVakansFG" FromRole="Vakans" ToRole="Trudoustr" />
           <NavigationProperty Name="Dolznost" Relationship="UGTUModel.VakansDolznostForeign" FromRole="Vakans" ToRole="Dolznost" />
           <NavigationProperty Name="Param_Vakans" Relationship="UGTUModel.Param_VakansVakansForeign" FromRole="Vakans" ToRole="Param_Vakans" />
+          <NavigationProperty Name="Status" Relationship="UGTUModel.VakansStatusForeign" FromRole="Vakans" ToRole="Status" />
         </EntityType>
         <EntityType Name="Predpriyatie">
           <Key>
@@ -584,6 +708,8 @@
           <Property Name="idFile" Type="Int32" />
           <NavigationProperty Name="Vakans" Relationship="UGTUModel.ResumeVakansForeign" FromRole="Resume" ToRole="Vakans" />
           <NavigationProperty Name="Trudoustr" Relationship="UGTUModel.TrudoustrResumeFG" FromRole="Resume" ToRole="Trudoustr" />
+          <NavigationProperty Name="Param_Resume" Relationship="UGTUModel.Param_ResumeResumeForeign" FromRole="Resume" ToRole="Param_Resume" />
+          <NavigationProperty Name="Status" Relationship="UGTUModel.ResumeStatusForeign" FromRole="Resume" ToRole="Status" />
         </EntityType>
         <Association Name="ResumeVakansForeign">
           <End Type="UGTUModel.Vakans" Role="Vakans" Multiplicity="0..1" />
@@ -754,6 +880,7 @@
           <Property Name="ParamName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Param_Vakans" Relationship="UGTUModel.Param_VakansParametrForeign" FromRole="Parametr" ToRole="Param_Vakans" />
           <NavigationProperty Name="ZnachParam" Relationship="UGTUModel.ZnachParamParametrForeign" FromRole="Parametr" ToRole="ZnachParam" />
+          <NavigationProperty Name="Param_Resume" Relationship="UGTUModel.Param_ResumeParametrForeign" FromRole="Parametr" ToRole="Param_Resume" />
         </EntityType>
         <EntityType Name="ZnachParam">
           <Key>
@@ -764,6 +891,7 @@
           <Property Name="idParam" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Param_Vakans" Relationship="UGTUModel.Param_VakansZnachParamForeign" FromRole="ZnachParam" ToRole="Param_Vakans" />
           <NavigationProperty Name="Parametr" Relationship="UGTUModel.ZnachParamParametrForeign" FromRole="ZnachParam" ToRole="Parametr" />
+          <NavigationProperty Name="Param_Resume" Relationship="UGTUModel.Param_ResumeZnachParamForeign" FromRole="ZnachParam" ToRole="Param_Resume" />
         </EntityType>
         <Association Name="Param_VakansParametrForeign">
           <End Type="UGTUModel.Parametr" Role="Parametr" Multiplicity="1" />
@@ -810,6 +938,90 @@
             </Principal>
             <Dependent Role="ZnachParam">
               <PropertyRef Name="idParam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Param_Resume">
+          <Key>
+            <PropertyRef Name="idParam_Resume" />
+          </Key>
+          <Property Name="idParam_Resume" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idParam" Type="Int32" Nullable="false" />
+          <Property Name="idResume" Type="Int32" Nullable="false" />
+          <Property Name="idResumeZnachParam" Type="Int32" />
+          <Property Name="Chislo" Type="Int32" />
+          <Property Name="Stroka" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Parametr" Relationship="UGTUModel.Param_ResumeParametrForeign" FromRole="Param_Resume" ToRole="Parametr" />
+          <NavigationProperty Name="Resume" Relationship="UGTUModel.Param_ResumeResumeForeign" FromRole="Param_Resume" ToRole="Resume" />
+          <NavigationProperty Name="ZnachParam" Relationship="UGTUModel.Param_ResumeZnachParamForeign" FromRole="Param_Resume" ToRole="ZnachParam" />
+        </EntityType>
+        <Association Name="Param_ResumeParametrForeign">
+          <End Type="UGTUModel.Parametr" Role="Parametr" Multiplicity="1" />
+          <End Type="UGTUModel.Param_Resume" Role="Param_Resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametr">
+              <PropertyRef Name="idParam" />
+            </Principal>
+            <Dependent Role="Param_Resume">
+              <PropertyRef Name="idParam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Param_ResumeResumeForeign">
+          <End Type="UGTUModel.Resume" Role="Resume" Multiplicity="1" />
+          <End Type="UGTUModel.Param_Resume" Role="Param_Resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resume">
+              <PropertyRef Name="idResume" />
+            </Principal>
+            <Dependent Role="Param_Resume">
+              <PropertyRef Name="idResume" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Param_ResumeZnachParamForeign">
+          <End Type="UGTUModel.ZnachParam" Role="ZnachParam" Multiplicity="0..1" />
+          <End Type="UGTUModel.Param_Resume" Role="Param_Resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZnachParam">
+              <PropertyRef Name="idZnachParam" />
+            </Principal>
+            <Dependent Role="Param_Resume">
+              <PropertyRef Name="idResumeZnachParam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="idStatus" />
+          </Key>
+          <Property Name="idStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Resume" Relationship="UGTUModel.ResumeStatusForeign" FromRole="Status" ToRole="Resume" />
+          <NavigationProperty Name="Vakans" Relationship="UGTUModel.VakansStatusForeign" FromRole="Status" ToRole="Vakans" />
+        </EntityType>
+        <Association Name="ResumeStatusForeign">
+          <End Type="UGTUModel.Status" Role="Status" Multiplicity="1" />
+          <End Type="UGTUModel.Resume" Role="Resume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="Resume">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VakansStatusForeign">
+          <End Type="UGTUModel.Status" Role="Status" Multiplicity="1" />
+          <End Type="UGTUModel.Vakans" Role="Vakans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="Vakans">
+              <PropertyRef Name="idStatus" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -978,6 +1190,27 @@
                 <ScalarProperty Name="idParam" ColumnName="idParam" />
                 <ScalarProperty Name="ZnachParamName" ColumnName="ZnachParamName" />
                 <ScalarProperty Name="idZnachParam" ColumnName="idZnachParam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Param_Resume">
+            <EntityTypeMapping TypeName="UGTUModel.Param_Resume">
+              <MappingFragment StoreEntitySet="Param_Resume">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Stroka" ColumnName="Stroka" />
+                <ScalarProperty Name="Chislo" ColumnName="Chislo" />
+                <ScalarProperty Name="idResumeZnachParam" ColumnName="idResumeZnachParam" />
+                <ScalarProperty Name="idResume" ColumnName="idResume" />
+                <ScalarProperty Name="idParam" ColumnName="idParam" />
+                <ScalarProperty Name="idParam_Resume" ColumnName="idParam_Resume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="UGTUModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

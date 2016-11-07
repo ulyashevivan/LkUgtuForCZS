@@ -12,24 +12,21 @@ namespace LkUgtu.orm
     using System;
     using System.Collections.Generic;
     
-    public partial class Parametr
+    public partial class Status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Parametr()
+        public Status()
         {
-            this.Param_Vakans = new HashSet<Param_Vakans>();
-            this.ZnachParam = new HashSet<ZnachParam>();
-            this.Param_Resume = new HashSet<Param_Resume>();
+            this.Resume = new HashSet<Resume>();
+            this.Vakans = new HashSet<Vakans>();
         }
     
-        public int idParam { get; set; }
-        public string ParamName { get; set; }
+        public int idStatus { get; set; }
+        public string StatusName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Param_Vakans> Param_Vakans { get; set; }
+        public virtual ICollection<Resume> Resume { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ZnachParam> ZnachParam { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Param_Resume> Param_Resume { get; set; }
+        public virtual ICollection<Vakans> Vakans { get; set; }
     }
 }
