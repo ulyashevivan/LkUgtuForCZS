@@ -74,7 +74,7 @@
                                 $(document.createElement('td'))
                                     .append(
                                         $(document.createElement('span'))
-                                        .html(i)))
+                                        .html(i+1)))
                             .append(
                                 $(document.createElement('td'))
                                     .append(
@@ -94,12 +94,12 @@
                                 $(document.createElement('td'))
                                     .append(
                                         $(document.createElement('span'))
-                                        .html((registrations[i].dateUnRegistration==null) ? '' : new Date(parseInt(registrations[i].dateUnRegistration.substr(6))).toLocaleDateString())))
+                                        .html((registrations[i].dateRegistration == null) ? '' : new Date(parseInt(registrations[i].dateRegistration.substr(6))).toLocaleDateString())))
                             .append(
                                 $(document.createElement('td'))
                                     .append(
                                         $(document.createElement('span'))
-                                        .html((registrations[i].dateRegistration==null) ? '' : new Date(parseInt(registrations[i].dateRegistration.substr(6))).toLocaleDateString())))
+                                        .html((registrations[i].dateUnRegistration == null) ? '' : new Date(parseInt(registrations[i].dateUnRegistration.substr(6))).toLocaleDateString())))
                             .append(
                                 $(document.createElement('td'))
                                     .append(

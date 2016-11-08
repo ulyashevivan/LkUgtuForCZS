@@ -19,13 +19,14 @@ namespace LkUgtu.Models
 
     public class VakansListDTO
     {
+        private readonly int stVakansOpen = 1;// open vakans
         public List<VakansDTO> vakans { get; private set; }
         public VakansListDTO()
         {
             using (var db = new UGTUEntities())
             {
                 this.vakans = new List<VakansDTO>();
-                var v = db.Vakans.ToList();
+                var v = db.Vakans.Where(s=>s.idStatus == stVakansOpen).OrderByDescending(o=>o.DataPostVakans).ToList();
                 this.vakans = v.Select(s => DTOClassConstructor.VakansDTO(s)).ToList();
             }
         }

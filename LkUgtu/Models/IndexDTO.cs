@@ -38,13 +38,13 @@ namespace LkUgtu.Models
     {
         public int countVakans { get; set; }
         public int countPredpr { get; set; }
-
+        private readonly int stVakansOpen = 1;// open vakans
         public IndexVakansDTO(int idStud)
         {
             using (var db = new UGTUEntities())
             {
                 this.countPredpr = db.Predpriyatie.Count();
-                this.countVakans = db.Vakans.Count();
+                this.countVakans = db.Vakans.Where(w=>w.idStatus == stVakansOpen).Count();
             }
         }
     }

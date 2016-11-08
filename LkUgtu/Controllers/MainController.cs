@@ -85,7 +85,7 @@ namespace LkUgtu.Controllers
         public JsonResult GetAllRegs()
         {
             var idStud = 29124;
-            return Json(new RegistrationDTOList(idStud).registrations.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(new RegistrationDTOList(idStud).registrations.OrderByDescending(o=>o.dateRegistration), JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetModalAddRegistration()
         {
@@ -96,10 +96,15 @@ namespace LkUgtu.Controllers
         }
         public ActionResult GetModalEditRegistration()
         {
+            int idStud = 29124;
             ViewBag.action = "Редактирование";
+            var model = new RegistrationDTOList(idStud).registrations.Where(w => w.dateUnRegistration == null).SingleOrDefault();
             var employments = new EmploymentDTOList().employments;
-            ViewBag.employments = new SelectList(employments, typeof(EmploymentDTO).GetProperties()[0].Name, typeof(EmploymentDTO).GetProperties()[1].Name).ToList();
-            return PartialView("ModalViewRegistrationEdit");
+            ViewBag.employments = new SelectList(employments
+                , typeof(EmploymentDTO).GetProperties()[0].Name
+                , typeof(EmploymentDTO).GetProperties()[1].Name
+                , model.employment.id).ToList();
+            return PartialView("ModalViewRegistrationEdit",model);
         }
         public ActionResult GetModalHistoryRegistration()
         {
