@@ -23,15 +23,16 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="myModalForVakans">
+</div>
 
 
 <script>
         $('#buttViewVakansList').click(function () {
             var url = "@Url.Action("GetModalViewVakansList")";
             $.get(url, function (data) {
-                $('#myModal').html(data);
-                $('#myModal').appendTo('body').modal('show');
+                $('#myModalForVakans').html(data);
+                $('#myModalForVakans').appendTo('body').modal('show');
                 //$('#tableVakansList')
                 //    .append(
                 //    $(document.createElement('div')).attr({

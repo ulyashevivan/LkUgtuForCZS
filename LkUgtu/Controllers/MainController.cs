@@ -23,11 +23,20 @@ namespace LkUgtu.Controllers
             {
 
                 userInfo = res;
+                
                 dto = new IndexDTO(
                     userInfo.student_info.accs.FirstOrDefault().email, 
                     userInfo.student_info.accs.FirstOrDefault().group_name, 
                     userInfo.student_info.accs.FirstOrDefault().ugtu_id
                     );
+                HttpContext.Session["idStud"] = dto.idStud;
+                //HttpContext.Session["emailStud"] = dto.email;
+                //HttpContext.Session["FIOStud"] = dto.fullName;
+                //HttpContext.Session["groupStud"] = dto.group_name;
+                //HttpContext.Response.Cookies["idStud"].Value = dto.idStud.ToString();
+                //HttpContext.Response.Cookies["emailStud"].Value = dto.email;
+                //HttpContext.Response.Cookies["FIOStud"].Value = dto.fullName;
+                //HttpContext.Response.Cookies["groupStud"].Value = dto.group_name;
                 return View(dto);
             } else
             {
@@ -79,12 +88,17 @@ namespace LkUgtu.Controllers
         }
         public JsonResult GetTrudoustr(int idTrud)
         {
-            var idStud = 29124;
+            int idStud = int.Parse(HttpContext.Request.Cookies["idStud"].Value);
             return Json(new TrudoustrListDTO(idStud).trudoustrs.Where(t=>t.idTrud == idTrud).ToList(), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetAllRegs()
         {
-            var idStud = 29124;
+            //string stud = HttpContext.Request.Cookies["idStud"].Value;
+            //string email = HttpContext.Request.Cookies["emailStud"].Value;
+            //string fio = HttpContext.Request.Cookies["FIOStud"].Value;
+            //string group = HttpContext.Request.Cookies["groupStud"].Value;
+            int idStud = (int)HttpContext.Session["idStud"];
+            //int idStud = int.Parse(HttpContext.Request.Cookies["idStud"].Value);
             return Json(new RegistrationDTOList(idStud).registrations.OrderByDescending(o=>o.dateRegistration), JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetModalAddRegistration()
@@ -96,7 +110,7 @@ namespace LkUgtu.Controllers
         }
         public ActionResult GetModalEditRegistration()
         {
-            int idStud = 29124;
+            int idStud = int.Parse(HttpContext.Request.Cookies["idStud"].Value);
             ViewBag.action = "Редактирование";
             var model = new RegistrationDTOList(idStud).registrations.Where(w => w.dateUnRegistration == null).SingleOrDefault();
             var employments = new EmploymentDTOList().employments;
@@ -116,6 +130,15 @@ namespace LkUgtu.Controllers
             ViewBag.reasonsforclose = new SelectList(reasonsforclose, typeof(ReasonForCloseDTO).GetProperties()[0].Name, typeof(ReasonForCloseDTO).GetProperties()[1].Name).ToList();
             return PartialView("ModalViewRegistrationClose");
         }
+        public JsonResult EditRegistrationSave(
+             int? idRes
+            ,int inputEmployment
+            ,string inputOtherInfo
+            ,string inputDateAdd)
+        {
+            //CRUDController.SaveRegistration(idRes,inputEmployment, inputOtherInfo, inputDateAdd);
+            return Json(null,JsonRequestBehavior.AllowGet);
+        }
         public JsonResult SendTrud(int? idTrud
                                   , string inputPredpr
                                   , string inputPost
@@ -131,7 +154,7 @@ namespace LkUgtu.Controllers
         {
             var r = Request.Params["inputPredpr"];
             var file = Request.Files["spravkaFile"];
-            int idStud = 29124;
+            int idStud = int.Parse(HttpContext.Request.Cookies["idStud"].Value);
             CRUDController.SaveTrud(idStud
                                   , idTrud
                                   , inputPredpr
@@ -148,10 +171,10 @@ namespace LkUgtu.Controllers
             return Json(r, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetAllRegistrations(int idStud)
-        {
+        //public JsonResult GetAllRegistrations(int idStud)
+        //{
 
-            return Json(null, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(null, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

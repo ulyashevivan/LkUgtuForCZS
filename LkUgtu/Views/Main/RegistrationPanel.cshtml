@@ -37,30 +37,39 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="myModalForRegistration">
+</div>
 
 <script>
+    $('#myModalForRegistration').on('click','#buttSubmit', function () {
+        $.post('@Url.Action("EditRegistrationSave")', $('#contRegistr').serialize(),
+        function (data) {
+            alert('save');
+            $('#myModalForRegistration').appendTo('body').modal('hide');
+        }, 'json');
+    });
     $('#buttAddRegistration').click(function () {
         var url = "@Url.Action("GetModalAddRegistration")";
         $.get(url, function (data) {
-            $('#myModal').html(data);
-            $('#myModal').appendTo('body').modal('show');
-            $('#inputDateAdd').val(new Date().toLocaleDateString());
-            $('#inputDateAdd').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+            $('#myModalForRegistration').html(data);
+            $('#myModalForRegistration').appendTo('body').modal('show');
+            $('#myModalForRegistration').find('#inputDateAdd').val(new Date().toLocaleDateString());
+            $('#myModalForRegistration').find('#inputDateAdd').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
         });
     });
     $('#buttEditRegistration').click(function () {
         var url = "@Url.Action("GetModalEditRegistration")";
         $.get(url, function (data) {
-            $('#myModal').html(data);
-            $('#myModal').appendTo('body').modal('show');
-            $('#inputDateAdd').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+            $('#myModalForRegistration').html(data);
+            $('#myModalForRegistration').appendTo('body').modal('show');
+            $('#myModalForRegistration').find('#inputDateAdd').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
         });
     });
     $('#buttHistoryRegistration').click(function () {
         var url = "@Url.Action("GetModalHistoryRegistration")";
         $.get(url, function (data) {
-            $('#myModal').html(data);
-            
+            $('#myModalForRegistration').html(data);
+
             $.ajax({
                 url: '@Url.Action("GetAllRegs")',
                 //data: { idStud: '29124' },
@@ -107,7 +116,7 @@
                                         .html(registrations[i].reasonClose.name)))
                                         );
                     }
-                    $('#myModal').appendTo('body').modal('show');
+                    $('#myModalForRegistration').appendTo('body').modal('show');
                 }
             });
         });
@@ -115,10 +124,10 @@
     $('#buttCloseRegistration').click(function () {
         var url = "@Url.Action("GetModalCloseRegistration")";
         $.get(url, function (data) {
-            $('#myModal').html(data);
-            $('#myModal').appendTo('body').modal('show');
-            $('#inputDateClose').val(new Date().toLocaleDateString());
-            $('#inputDateClose').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+            $('#myModalForRegistration').html(data);
+            $('#myModalForRegistration').appendTo('body').modal('show');
+            $('#myModalForRegistration').find('#inputDateClose').val(new Date().toLocaleDateString());
+            $('#myModalForRegistration').find('#inputDateClose').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
         });
     });
 </script>

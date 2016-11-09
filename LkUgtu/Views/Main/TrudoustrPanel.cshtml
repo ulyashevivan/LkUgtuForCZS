@@ -25,8 +25,10 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="myModalForTrudoustr">
+</div>
 
-<div id="myModalEdit" class="modal fade"></div>
+<div id="myModalEditTrudoustr" class="modal fade"></div>
 
 <script>
 
@@ -34,29 +36,29 @@
     $('#buttAddTrudoustr').click(function () {
         var url = "@Url.Action("GetModalAddTrudoustr")";
         $.get(url, function (data) {
-            $('#myModalEdit').html(data);
-            $('#inputDateAdd').val(new Date().toLocaleDateString());
-            $('#inputDateStart').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
-            $('#inputDateStop').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
-            $('#inputDateAdd').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+            $('#myModalEditTrudoustr').html(data);
+            $('#myModalEditTrudoustr').find('#inputDateAdd').val(new Date().toLocaleDateString());
+            $('#myModalEditTrudoustr').find('#inputDateStart').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+            $('#myModalEditTrudoustr').find('#inputDateStop').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+            $('#myModalEditTrudoustr').find('#inputDateAdd').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
             $.get('/Base/AutocompletePred', function (data) {
-                $('#inputPredpr').typeahead({ source: data });
+                $('#myModalEditTrudoustr').find('#inputPredpr').typeahead({ source: data });
             });
             $.get('/Base/AutocompletePost', function (data) {
-                $('#inputPost').typeahead({ source: data });
+                $('#myModalEditTrudoustr').find('#inputPost').typeahead({ source: data });
             });
             $.get('/Base/AutocompleteDepartment', function (data) {
-                $('#inputDepartment').typeahead({ source: data });
+                $('#myModalEditTrudoustr').find('#inputDepartment').typeahead({ source: data });
             });
-            $('#myModalEdit').appendTo('body').modal('show');
+            $('#myModalEditTrudoustr').appendTo('body').modal('show');
         });
     });
 
     $('#buttViewTrudoustrList').click(function () {
         var url = "@Url.Action("GetModalViewTrudoustrList")";
         $.get(url, function (data) {
-            $('#myModal').html(data);
-            $('#myModal').appendTo('body').modal('show');
+            $('#myModalForTrudoustr').html(data);
+            $('#myModalForTrudoustr').appendTo('body').modal('show');
             //$('#tableVakansList')
             //    .append(
             //    $(document.createElement('div')).attr({
@@ -135,7 +137,7 @@
 
         });
     });
-    $(document).on('click', '.editTrud', function () {
+    $('#myModalForTrudoustr').on('click', '.editTrud', function () {
         var idt = $(this).attr('data');
         var url = "@Url.Action("GetModalViewTrudoustrEdit")";
         $.get(url, function (data) {
@@ -146,44 +148,44 @@
             contentType: "application/json",
             dataType: "json",
             success: function (tr) {
-                $('#myModalEdit').html(data);
-                $('#myModalEdit').appendTo('body').modal('show');
+                $('#myModalEditTrudoustr').html(data);
+                $('#myModalEditTrudoustr').appendTo('body').modal('show');
                 var t = tr[0];
-                $('#idTrud').val(t.idTrud);
-                $('#inputPredpr').val(t.company.name);
-                $('#inputPost').val(t.post.name);
-                $('#inputDepartment').val(t.department);
-                $('#inputSalary').val(t.salary);
-                $('#inputDateStart').val(new Date(parseInt(t.dateStart.substr(6))).toLocaleDateString());
-                $('#inputDateStop').val(new Date(parseInt(t.dateStop.substr(6))).toLocaleDateString());
-                $('#inputOtherInfo').val(t.otherInfo);
-                $('#checkIsSpeciality').attr('checked',t.isWorkSpecialty);
-                $('#checkWithSpravka').attr('checked', t.withSpravka);
-                $('#checkIsPraktik').attr('checked', t.isPractik);
-                $('#inputDateAdd').val(new Date(parseInt(t.dateCall.substr(6))).toLocaleDateString());
-                $('#inputDateStart').datepicker({format:'dd.mm.yyyy', language:'ru'});
-                $('#inputDateStop').datepicker({format: 'dd.mm.yyyy', language: 'ru' });
-                $('#inputDateAdd').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+                $('#myModalEditTrudoustr').find('#idTrud').val(t.idTrud);
+                $('#myModalEditTrudoustr').find('#inputPredpr').val(t.company.name);
+                $('#myModalEditTrudoustr').find('#inputPost').val(t.post.name);
+                $('#myModalEditTrudoustr').find('#inputDepartment').val(t.department);
+                $('#myModalEditTrudoustr').find('#inputSalary').val(t.salary);
+                $('#myModalEditTrudoustr').find('#inputDateStart').val(new Date(parseInt(t.dateStart.substr(6))).toLocaleDateString());
+                $('#myModalEditTrudoustr').find('#inputDateStop').val(new Date(parseInt(t.dateStop.substr(6))).toLocaleDateString());
+                $('#myModalEditTrudoustr').find('#inputOtherInfo').val(t.otherInfo);
+                $('#myModalEditTrudoustr').find('#checkIsSpeciality').attr('checked', t.isWorkSpecialty);
+                $('#myModalEditTrudoustr').find('#checkWithSpravka').attr('checked', t.withSpravka);
+                $('#myModalEditTrudoustr').find('#checkIsPraktik').attr('checked', t.isPractik);
+                $('#myModalEditTrudoustr').find('#inputDateAdd').val(new Date(parseInt(t.dateCall.substr(6))).toLocaleDateString());
+                $('#myModalEditTrudoustr').find('#inputDateStart').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+                $('#myModalEditTrudoustr').find('#inputDateStop').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+                $('#myModalEditTrudoustr').find('#inputDateAdd').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
                 $.get('/Base/AutocompletePred', function (data) {
-                    $('#inputPredpr').typeahead({ source: data });
+                    $('#myModalEditTrudoustr').find('#inputPredpr').typeahead({ source: data });
                 });
                 $.get('/Base/AutocompletePost', function (data) {
-                    $('#inputPost').typeahead({source:data});
+                    $('#myModalEditTrudoustr').find('#inputPost').typeahead({ source: data });
                 });
                 $.get('/Base/AutocompleteDepartment', function (data) {
-                    $('#inputDepartment').typeahead({ source: data });
+                    $('#myModalEditTrudoustr').find('#inputDepartment').typeahead({ source: data });
                 });
             }
         });
     });
 
     });
-    $(document).on('click', '#buttSubmit', function () {
+    $('#myModalEditTrudoustr').on('click', '#buttSubmit', function () {
         $.post('@Url.Action("SendTrud")', $('#contTrud').serialize(),
         function (data) {
             alert('save');
-            $('#myModalEdit').appendTo('body').modal('hide');
-            $('#myModal').appendTo('body').modal('hide');
+            $('#myModalEditTrudoustr').appendTo('body').modal('hide');
+            $('#myModalForTrudoustr').appendTo('body').modal('hide');
         }, 'json');
 
       @*  $('#contTrud').attr

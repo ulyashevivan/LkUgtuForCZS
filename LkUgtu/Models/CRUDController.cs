@@ -141,6 +141,35 @@ namespace LkUgtu.Models
             }
         }
 
+        public static void SaveRegistration(int? idRes, int inputEmployment, string inputOtherInfo, string inputDateAdd)
+        {
+            try
+            {
+                if (idRes == null)
+                {
+
+                }
+                else {
+                    SaveOldRegistration((int)idRes, inputEmployment, inputOtherInfo, inputDateAdd);
+                }
+            } catch(Exception e)
+            {
+                
+            }
+        }
+
+        private static void SaveOldRegistration(int idRes, int inputEmployment, string inputOtherInfo, string inputDateAdd)
+        {
+            using (var db = new UGTUEntities())
+            {
+                var registration = db.Resume.Where(w => w.idResume == idRes).SingleOrDefault();
+                registration.DopInfo = inputOtherInfo;
+                registration.DataPrinytiya = DateTime.Parse(inputDateAdd);
+                registration.Param_Resume.Where(w => w.idParam == czsCONSTs.idParamEmployment).SingleOrDefault().idResumeZnachParam = inputEmployment;
+                db.SaveChanges();
+            }
+        }
+
         private static int AddNewPredpr(string predpr)
         {
             throw new Exception();
