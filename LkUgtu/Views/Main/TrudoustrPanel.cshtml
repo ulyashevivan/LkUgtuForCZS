@@ -80,6 +80,7 @@
                 dataType: "json",
                 success: function (tr) {
                     for (var i = 0; i < tr.length; i++) {
+                        var periodTrud = ((tr[i].dateStart == null) ? '' : new Date(parseInt(tr[i].dateStart.substr(6))).toLocaleDateString()) + ((tr[i].dateStop == null) ? '' : ' - ' + new Date(parseInt(tr[i].dateStop.substr(6))).toLocaleDateString());
                         $('#tableTrudoustrList')
                              .append(
                              $(document.createElement('tr'))
@@ -105,7 +106,7 @@
                                   .append(
                                  $(document.createElement('td'))
                                      .append(
-                                     $(document.createElement('span')).html((tr[i].dateStart == null) ? '' : new Date(parseInt(tr[i].dateStart.substr(6))).toLocaleDateString() + ' - ' + new Date(parseInt(tr[i].dateStop.substr(6))).toLocaleDateString())))
+                                     $(document.createElement('span')).html(periodTrud)))
                                   .append(
                                  $(document.createElement('td'))
                                      .append(
@@ -156,8 +157,8 @@
                 $('#myModalEditTrudoustr').find('#inputPost').val(t.post.name);
                 $('#myModalEditTrudoustr').find('#inputDepartment').val(t.department);
                 $('#myModalEditTrudoustr').find('#inputSalary').val(t.salary);
-                $('#myModalEditTrudoustr').find('#inputDateStart').val(new Date(parseInt(t.dateStart.substr(6))).toLocaleDateString());
-                $('#myModalEditTrudoustr').find('#inputDateStop').val(new Date(parseInt(t.dateStop.substr(6))).toLocaleDateString());
+                $('#myModalEditTrudoustr').find('#inputDateStart').val(t.dateStart==null ? "" : new Date(parseInt(t.dateStart.substr(6))).toLocaleDateString());
+                $('#myModalEditTrudoustr').find('#inputDateStop').val(t.dateStop == null ? "" : new Date(parseInt(t.dateStop.substr(6))).toLocaleDateString());
                 $('#myModalEditTrudoustr').find('#inputOtherInfo').val(t.otherInfo);
                 $('#myModalEditTrudoustr').find('#checkIsSpeciality').attr('checked', t.isWorkSpecialty);
                 $('#myModalEditTrudoustr').find('#checkWithSpravka').attr('checked', t.withSpravka);
@@ -183,7 +184,7 @@
     $('#myModalEditTrudoustr').on('click', '#buttSubmit', function () {
         $.post('@Url.Action("SendTrud")', $('#contTrud').serialize(),
         function (data) {
-            alert('save');
+            alert(data);
             $('#myModalEditTrudoustr').appendTo('body').modal('hide');
             $('#myModalForTrudoustr').appendTo('body').modal('hide');
         }, 'json');

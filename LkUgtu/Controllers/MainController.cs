@@ -82,13 +82,14 @@ namespace LkUgtu.Controllers
         {
             return Json((search==null)?new VakansListDTO().vakans.ToList():new VakansListDTO().vakans.Where(p=>p.post.ToLower().Contains(search)).ToList(), JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetAllTrudoustr(int idStud)
-        { 
+        public JsonResult GetAllTrudoustr()
+        {
+            int idStud = (int)HttpContext.Session["idStud"];
             return Json(new TrudoustrListDTO(idStud).trudoustrs, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetTrudoustr(int idTrud)
         {
-            int idStud = int.Parse(HttpContext.Request.Cookies["idStud"].Value);
+            int idStud = (int)HttpContext.Session["idStud"];
             return Json(new TrudoustrListDTO(idStud).trudoustrs.Where(t=>t.idTrud == idTrud).ToList(), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetAllRegs()
@@ -110,7 +111,7 @@ namespace LkUgtu.Controllers
         }
         public ActionResult GetModalEditRegistration()
         {
-            int idStud = int.Parse(HttpContext.Request.Cookies["idStud"].Value);
+            int idStud = (int)HttpContext.Session["idStud"];
             ViewBag.action = "Редактирование";
             var model = new RegistrationDTOList(idStud).registrations.Where(w => w.dateUnRegistration == null).SingleOrDefault();
             var employments = new EmploymentDTOList().employments;
@@ -136,8 +137,9 @@ namespace LkUgtu.Controllers
             ,string inputOtherInfo
             ,string inputDateAdd)
         {
-            //CRUDController.SaveRegistration(idRes,inputEmployment, inputOtherInfo, inputDateAdd);
-            return Json(null,JsonRequestBehavior.AllowGet);
+            int idStud = (int)HttpContext.Session["idStud"];
+            CRUDController.SaveRegistration(idStud, idRes, inputEmployment, inputOtherInfo, inputDateAdd);
+            return Json("OK",JsonRequestBehavior.AllowGet);
         }
         public JsonResult SendTrud(int? idTrud
                                   , string inputPredpr
@@ -154,7 +156,7 @@ namespace LkUgtu.Controllers
         {
             var r = Request.Params["inputPredpr"];
             var file = Request.Files["spravkaFile"];
-            int idStud = int.Parse(HttpContext.Request.Cookies["idStud"].Value);
+            int idStud = (int)HttpContext.Session["idStud"];
             CRUDController.SaveTrud(idStud
                                   , idTrud
                                   , inputPredpr
@@ -168,7 +170,7 @@ namespace LkUgtu.Controllers
                                   , checkWithSpravka
                                   , checkIsPraktik
                                   , inputDateAdd);
-            return Json(r, JsonRequestBehavior.AllowGet);
+            return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
         //public JsonResult GetAllRegistrations(int idStud)

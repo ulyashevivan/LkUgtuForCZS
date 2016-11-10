@@ -84,8 +84,8 @@ namespace LkUgtu.Models
                 tr.Otdel = Department;
                 tr.ZarPlata = Salary;
                 tr.DopInfo = OtherInfo;
-                tr.DataBegin = DateTime.Parse(DateStart);
-                tr.DataEnd = DateTime.Parse(DateStop);
+                tr.DataBegin = string.IsNullOrWhiteSpace(DateStart) ? null : (DateTime?)DateTime.Parse(DateStart);
+                tr.DataEnd = string.IsNullOrWhiteSpace(DateStop) ? null : (DateTime?)DateTime.Parse(DateStop);
                 tr.DataObzvon = DateTime.Parse(DateAdd);
                 tr.RabotaPoSpec = GetBoolByString(IsSpeciality);
                 tr.Spravka = GetBoolByString(WithSpravka);
@@ -141,7 +141,7 @@ namespace LkUgtu.Models
             }
         }
 
-        public static void SaveRegistration(int? idRes, int inputEmployment, string inputOtherInfo, string inputDateAdd)
+        public static void SaveRegistration(int idStud, int? idRes, int inputEmployment, string inputOtherInfo, string inputDateAdd)
         {
             try
             {
@@ -150,7 +150,7 @@ namespace LkUgtu.Models
 
                 }
                 else {
-                    SaveOldRegistration((int)idRes, inputEmployment, inputOtherInfo, inputDateAdd);
+                    SaveOldRegistration(idStud, (int)idRes, inputEmployment, inputOtherInfo, inputDateAdd);
                 }
             } catch(Exception e)
             {
@@ -158,11 +158,11 @@ namespace LkUgtu.Models
             }
         }
 
-        private static void SaveOldRegistration(int idRes, int inputEmployment, string inputOtherInfo, string inputDateAdd)
+        private static void SaveOldRegistration(int idStud, int idRes, int inputEmployment, string inputOtherInfo, string inputDateAdd)
         {
             using (var db = new UGTUEntities())
             {
-                var registration = db.Resume.Where(w => w.idResume == idRes).SingleOrDefault();
+                var registration = db.Resume.Where(w => w.idResume == idRes && w.idStud==idStud).SingleOrDefault();
                 registration.DopInfo = inputOtherInfo;
                 registration.DataPrinytiya = DateTime.Parse(inputDateAdd);
                 registration.Param_Resume.Where(w => w.idParam == czsCONSTs.idParamEmployment).SingleOrDefault().idResumeZnachParam = inputEmployment;
@@ -197,8 +197,8 @@ namespace LkUgtu.Models
                     IDDolznost = GetIdPostByName(Post, db),
                     Otdel = Department,
                     ZarPlata = Salary,
-                    DataBegin = DateTime.Parse(DateStart),
-                    DataEnd = DateTime.Parse(DateStop),
+                    DataBegin = string.IsNullOrWhiteSpace(DateStart) ? null : (DateTime?)DateTime.Parse(DateStart),
+                    DataEnd = string.IsNullOrWhiteSpace(DateStop) ? null : (DateTime?)DateTime.Parse(DateStop),
                     DataObzvon = DateTime.Parse(DateAdd),
                     DopInfo = OtherInfo,
                     RabotaPoSpec = GetBoolByString(IsSpeciality),

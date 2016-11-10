@@ -15,8 +15,9 @@
                 <div class="form-group">
                     <label for="inputMail">E-mail</label>
                     <input type="text" class="form-control" name="inputMail" id="inputMail" autocomplete="off" placeholder="E-mail">
-                </div>-->
-           
+                </div>
+                <input type="hidden" id="idRes" name="idRes"> -->
+                @Html.Hidden("idRes", Model.id)
                 <div class="form-group">
                     <label for="inputEmployment">Тип занятости</label>
                     @Html.DropDownList("inputEmployment", (IEnumerable<SelectListItem>) ViewBag.employments , new { @class = "form-control" })
