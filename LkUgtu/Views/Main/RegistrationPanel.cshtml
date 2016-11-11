@@ -120,6 +120,13 @@
             });
         });
     });
+    $('#myModalForRegistration').on('click', '#buttSubmit', function () {
+        $.post('@Url.Action("...")', $('#...').serialize(),
+        function (data) {
+            alert('save');
+            $('#myModalForRegistration').appendTo('body').modal('hide');
+        }, 'json');
+    });
     $('#buttCloseRegistration').click(function () {
         var url = "@Url.Action("GetModalCloseRegistration")";
         $.get(url, function (data) {
