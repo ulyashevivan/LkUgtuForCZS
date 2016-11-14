@@ -104,16 +104,18 @@ namespace LkUgtu.Controllers
         }
         public ActionResult GetModalAddRegistration()
         {
+            int idStud = (int)HttpContext.Session["idStud"];
             ViewBag.action = "Добавление";
+            RegistrationDTO model = new RegistrationDTO();
             var employments = new EmploymentDTOList().employments;
             ViewBag.employments = new SelectList(employments, typeof(EmploymentDTO).GetProperties()[0].Name, typeof(EmploymentDTO).GetProperties()[1].Name).ToList();
-            return PartialView("ModalViewRegistrationEdit");
+            return PartialView("ModalViewRegistrationEdit", model);
         }
         public ActionResult GetModalEditRegistration()
         {
             int idStud = (int)HttpContext.Session["idStud"];
             ViewBag.action = "Редактирование";
-            var model = new RegistrationDTOList(idStud).registrations.Where(w => w.dateUnRegistration == null).SingleOrDefault();
+            var model = new RegistrationDTOList(idStud).registrations.Where(w => w.dateUnRegistration == null && w.stateReg.id == czsCONSTs.statusResumeOpen).SingleOrDefault();
             var employments = new EmploymentDTOList().employments;
             ViewBag.employments = new SelectList(employments
                 , typeof(EmploymentDTO).GetProperties()[0].Name
@@ -127,7 +129,9 @@ namespace LkUgtu.Controllers
         }
         public ActionResult GetModalCloseRegistration()
         {
+            int idStud = (int)HttpContext.Session["idStud"];
             var reasonsforclose = new ReasonsForCloseDTOList().reasonsforclose;
+            ViewBag.idStud = idStud;
             ViewBag.reasonsforclose = new SelectList(reasonsforclose, typeof(ReasonForCloseDTO).GetProperties()[0].Name, typeof(ReasonForCloseDTO).GetProperties()[1].Name).ToList();
             return PartialView("ModalViewRegistrationClose");
         }
@@ -140,6 +144,14 @@ namespace LkUgtu.Controllers
             int idStud = (int)HttpContext.Session["idStud"];
             CRUDController.SaveRegistration(idStud, idRes, inputEmployment, inputOtherInfo, inputDateAdd);
             return Json("OK",JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CloseRegistrationSave(
+            int idStud
+            ,int inputReasonClose
+            ,string inputDateClose)
+        {
+            CRUDController.CloseRegistration(idStud, inputReasonClose, inputDateClose);
+            return Json("OK", JsonRequestBehavior.AllowGet);
         }
         public JsonResult SendTrud(int? idTrud
                                   , string inputPredpr

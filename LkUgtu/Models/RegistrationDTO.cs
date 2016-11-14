@@ -29,6 +29,18 @@ namespace LkUgtu.Models
             stateReg = DTOClassConstructor.stateRegistrarionDTO(res.Status);
 
         }
+        public RegistrationDTO()
+        {
+            id = 0;
+            marks = null;
+            otherInfo = null;
+            reasonClose = null;
+            dateRegistration = DateTime.Now;
+            dateUnRegistration = null;
+            employment = null;
+            stateReg = null;
+
+        }
     }
 
     public class stateRegistrarionDTO

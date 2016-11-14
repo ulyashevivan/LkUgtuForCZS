@@ -36,16 +36,25 @@
             <p>Общее число обращений: @Model.countReg </p>
         </div>
     </div>
+
 </div>
 <div class="modal fade" id="myModalForRegistration">
 </div>
 
 <script>
-    $('#myModalForRegistration').on('click','#buttSubmit', function () {
+    $('#myModalForRegistration').on('click', '#buttEditSubmit', function () {
         $.post('@Url.Action("EditRegistrationSave")', $('#contRegistr').serialize(),
         function (data) {
-            alert('save');
+            alert('edit save');
             $('#myModalForRegistration').appendTo('body').modal('hide');
+        }, 'json');
+    });
+    $('#myModalForRegistration').on('click', '#buttCloseSubmit', function () {
+        $.post('@Url.Action("CloseRegistrationSave")', $('#contRegistrClose').serialize(),
+        function (data) {
+            alert('close save');
+            $('#myModalForRegistration').appendTo('body').modal('hide');
+            //history.go(0);
         }, 'json');
     });
     $('#buttAddRegistration').click(function () {
@@ -63,6 +72,15 @@
             $('#myModalForRegistration').html(data);
             $('#myModalForRegistration').appendTo('body').modal('show');
             $('#myModalForRegistration').find('#inputDateAdd').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
+        });
+    });
+    $('#buttCloseRegistration').click(function () {
+        var url = "@Url.Action("GetModalCloseRegistration")";
+        $.get(url, function (data) {
+            $('#myModalForRegistration').html(data);
+            $('#myModalForRegistration').appendTo('body').modal('show');
+            $('#myModalForRegistration').find('#inputDateClose').val(new Date().toLocaleDateString());
+            $('#myModalForRegistration').find('#inputDateClose').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
         });
     });
     $('#buttHistoryRegistration').click(function () {
@@ -120,20 +138,6 @@
             });
         });
     });
-    $('#myModalForRegistration').on('click', '#buttSubmit', function () {
-        $.post('@Url.Action("...")', $('#...').serialize(),
-        function (data) {
-            alert('save');
-            $('#myModalForRegistration').appendTo('body').modal('hide');
-        }, 'json');
-    });
-    $('#buttCloseRegistration').click(function () {
-        var url = "@Url.Action("GetModalCloseRegistration")";
-        $.get(url, function (data) {
-            $('#myModalForRegistration').html(data);
-            $('#myModalForRegistration').appendTo('body').modal('show');
-            $('#myModalForRegistration').find('#inputDateClose').val(new Date().toLocaleDateString());
-            $('#myModalForRegistration').find('#inputDateClose').datepicker({ format: 'dd.mm.yyyy', language: 'ru' });
-        });
-    });
+
+
 </script>

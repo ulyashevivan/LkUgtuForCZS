@@ -209,5 +209,36 @@ namespace LkUgtu.Models
                 db.SaveChanges();
             }
         }
+
+        public static void CloseRegistration(int idStud, int inputReasonClose, string inputDateClose)
+        {
+            try
+            {
+                using (var db = new UGTUEntities())
+                {
+                    var resume = db.Resume.Where(r => r.idStud == idStud
+                    && r.idStatus == czsCONSTs.statusResumeOpen).SingleOrDefault();
+                    if (resume != null && resume.Param_Resume.Count == 1)
+                    {
+                        resume.idStatus = czsCONSTs.statusResumeClsoe;
+                        resume.DataZakritiya = DateTime.Parse(inputDateClose);
+                            resume.Param_Resume.Add(new Param_Resume() {
+                                idResume = resume.idResume,
+                                idParam = czsCONSTs.idParamCloseReg,
+                                idResumeZnachParam = inputReasonClose
+                            });
+                        resume.UstroenCZS = inputReasonClose == czsCONSTs.idTrudWithCZS ? true : false;
+                        db.SaveChanges();
+                        }
+                    else {
+                        throw new Exception("registration not found");
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
+        }
     }
 }

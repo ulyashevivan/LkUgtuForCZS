@@ -4,9 +4,11 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel"> Закрытие регистрации </h4>
         </div>
-        <div class="modal-body" id="contTrudoustrEdit">
+        <div class="modal-body">
 
-            <form id="contTrud" enctype="multipart/form-data">
+            <form id="contRegistrClose" enctype="multipart/form-data">
+               <!-- <input type="hidden" id="idStud" name="idStud" />-->
+                @Html.Hidden("idStud", ViewBag.idStud as string)
                 <div class="form-group">
                     <label for="inputReasonClose">Причина закрытия</label>
                     @Html.DropDownList("inputReasonClose", (IEnumerable<SelectListItem>)ViewBag.reasonsforclose, new { @class = "form-control" })
@@ -22,7 +24,7 @@
         <div class="modal-footer">
             <div class="pull-left">
             </div>
-            <button type="button" class="btn btn-default" id="buttSubmit">Сохранить</button>
+            <button type="button" class="btn btn-default" id="buttCloseSubmit">Сохранить</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
         </div>
     </div>
